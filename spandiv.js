@@ -1,7 +1,7 @@
 /*
  * Required:
- * JS: JQuery 3.5, Bootstrap 5, DataTables, Quill Editor, Datepicker, Daterangepicker
- * CSS: Bootstrap 5, Bootstrap Icons, DataTables, Quill Editor, Datepicker, Daterangepicker
+ * JS: JQuery 3.5, Bootstrap 5, DataTables, Quill Editor, Datepicker, Daterangepicker, JQuery UI
+ * CSS: Bootstrap 5, Bootstrap Icons, DataTables, Quill Editor, Datepicker, Daterangepicker, JQuery UI
  */
 
 
