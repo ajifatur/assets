@@ -1,7 +1,7 @@
 /*
  * Required:
- * JS: JQuery 3.5, Bootstrap 5, DataTables, Quill Editor, Daterangepicker
- * CSS: Bootstrap 5, Bootstrap Icons, DataTables, Quill Editor, Daterangepicker
+ * JS: JQuery 3.5, Bootstrap 5, DataTables, Quill Editor, Datepicker, Daterangepicker
+ * CSS: Bootstrap 5, Bootstrap Icons, DataTables, Quill Editor, Datepicker, Daterangepicker
  */
 
 
@@ -15,6 +15,19 @@ var Spandiv = Spandiv || {};
         n.Tooltip();
         n.ButtonLogout(".btn-logout", "#form-logout");
         n.ButtonTogglePassword(".btn-toggle-password");
+    }
+
+    // Button Delete
+    n.ButtonDelete = (button, form) => {
+        $(document).on("click", button, function(e) {
+            e.preventDefault();
+            var id = $(this).data("id");
+            var ask = confirm("Anda yakin ingin menghapus data ini?");
+            if(ask) {
+                $(form).find("input[name=id]").val(id);
+                $(form).submit();
+            }
+        });
     }
 
     // Button Logout
@@ -41,10 +54,18 @@ var Spandiv = Spandiv || {};
 
     // Bootstrap Tooltip
     n.Tooltip = () => {
-        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
         tooltipTriggerList.map(function (tooltipTriggerEl) {
             return new bootstrap.Tooltip(tooltipTriggerEl);
         });
+    }
+
+    // Bootstrap Toast
+    n.Toast = (selector, message) => {
+        $(".toast-container").removeClass("d-none");
+        $(selector).find(".toast-body").text(message);
+        var toast = new bootstrap.Toast(document.querySelector(selector));
+        toast.show();
     }
 
     // DataTable
@@ -72,7 +93,6 @@ var Spandiv = Spandiv || {};
             ],
             order: []
         });
-
         return datatable;
     }
 
@@ -103,8 +123,17 @@ var Spandiv = Spandiv || {};
                 readOnly: false
             });
         }
-
         return quill;
+    }
+
+    // Datepicker
+    n.DatePicker = (selector) => {
+        var datepicker = $(selector).datepicker({
+            format: "dd/mm/yyyy",
+            todayHighlight: true,
+            autoclose: true
+        });
+        return datepicker;
     }
 
     // Daterangepicker
@@ -119,7 +148,6 @@ var Spandiv = Spandiv || {};
                 format: 'DD/MM/YYYY HH:mm'
             }
         });
-
         return daterangepicker;
     }
 })(Spandiv);

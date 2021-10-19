@@ -1,0 +1,26 @@
+/* DataTable */
+.dataTable thead tr th {
+    text-align: center;
+}
+
+/* Quill Editor */
+.ql-snow p {
+    margin-bottom: 0;
+}
+.ql-snow img {
+    max-width: 100%;
+}
+
+/* Bootstrap Toast */
+.toast-container {
+    margin: var(--bs-gutter-x,.75rem);
+}
+
+/* JQUery UI */
+.ui-state-highlight {
+    height: 2rem;
+    margin-bottom: 1rem;
+}
+.ui-sortable .ui-sortable-handle {
+    cursor: move;
+}
