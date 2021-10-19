@@ -150,4 +150,17 @@ var Spandiv = Spandiv || {};
         });
         return daterangepicker;
     }
+
+    // Sortable
+    n.Sortable = (selector, update) => {
+        $(selector).sortable({
+            placeholder: "ui-state-highlight",
+            start: function(event, ui){
+                $(".ui-state-highlight").css("height", $(ui.item).outerHeight());
+            },
+            update: update
+        });
+        $(selector).disableSelection();
+    }
+
 })(Spandiv);
