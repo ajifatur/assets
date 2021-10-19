@@ -1,7 +1,7 @@
 /*
  * Required:
- * JS: JQuery 3.5, Bootstrap 5, DataTables, Quill Editor, Datepicker, Daterangepicker, JQuery UI
- * CSS: Bootstrap 5, Bootstrap Icons, DataTables, Quill Editor, Datepicker, Daterangepicker, JQuery UI
+ * JS: JQuery 3.5, Bootstrap 5, DataTables, Quill Editor, Datepicker, Daterangepicker, Moment JS, JQuery UI
+ * CSS: Bootstrap 5, Bootstrap Icons, DataTables, Quill Editor, Datepicker, Daterangepicker, Moment JS, JQuery UI
  */
 
 
@@ -49,6 +49,29 @@ var Spandiv = Spandiv || {};
             var icon = $(this).parents(".input-group").find("i").attr("class");
             type === "password" ? $(this).parents(".input-group").find("input").attr("type","text") : $(this).parents(".input-group").find("input").attr("type","password");
             icon === "bi-eye" ? $(this).parents(".input-group").find("i").attr("class","bi-eye-slash") : $(this).parents(".input-group").find("i").attr("class","bi-eye");
+        });
+    }
+
+    // Checkbox One
+    n.CheckboxOne = () => {
+        $(document).on("click", ".dataTable .checkbox-one", function() {
+            $(".dataTable .checkbox-all").prop("checked", false);
+        });
+    }
+
+    // Checkbox All
+    n.CheckboxAll = () => {
+        $(document).on("click", ".dataTable .checkbox-all", function() {
+            if($(this).prop("checked")) {
+                $(".dataTable .checkbox-one").each(function(key,elem) {
+                    $(elem).prop("checked", true);
+                });
+            }
+            else {
+                $(".dataTable .checkbox-one").each(function(key,elem) {
+                    $(elem).prop("checked", false);
+                });
+            }
         });
     }
 
