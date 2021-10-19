@@ -2,6 +2,9 @@
 .form-check-input {
     cursor: pointer;
 }
+.toast-container {
+    margin: var(--bs-gutter-x, .75rem);
+}
 
 /* DataTable */
 .dataTable thead tr th {
@@ -14,11 +17,6 @@
 }
 .ql-snow img {
     max-width: 100%;
-}
-
-/* Bootstrap Toast */
-.toast-container {
-    margin: var(--bs-gutter-x, .75rem);
 }
 
 /* JQuery UI */

@@ -1,7 +1,7 @@
 /*
  * Required:
  * JS: JQuery 3.5, Bootstrap 5, DataTables, Quill Editor, Datepicker, Daterangepicker, Moment JS, JQuery UI
- * CSS: Bootstrap 5, Bootstrap Icons, DataTables, Quill Editor, Datepicker, Daterangepicker, Moment JS, JQuery UI
+ * CSS: Bootstrap 5, Bootstrap Icons, DataTables, Quill Editor, Datepicker, Daterangepicker
  */
 
 
@@ -62,16 +62,7 @@ var Spandiv = Spandiv || {};
     // Checkbox All
     n.CheckboxAll = () => {
         $(document).on("click", ".dataTable .checkbox-all", function() {
-            if($(this).prop("checked")) {
-                $(".dataTable .checkbox-one").each(function(key,elem) {
-                    $(elem).prop("checked", true);
-                });
-            }
-            else {
-                $(".dataTable .checkbox-one").each(function(key,elem) {
-                    $(elem).prop("checked", false);
-                });
-            }
+            $(this).prop("checked") ? $(".dataTable .checkbox-one").prop("checked", true) : $(".dataTable .checkbox-one").prop("checked", false);
         });
     }
 
