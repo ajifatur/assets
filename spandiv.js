@@ -1,8 +1,52 @@
+/*
+ * Required:
+ * JS: JQuery 3.5, Bootstrap 5, DataTables, Quill Editor, Daterangepicker
+ * CSS: Bootstrap 5, Bootstrap Icons, DataTables, Quill Editor, Daterangepicker
+ */
+
+
 // Call the namespace
 var Spandiv = Spandiv || {};
 
 // Object inside namespace
 (function(n) {
+    // Enable Everywhere
+    n.EnableEverywhere = () => {
+        n.Tooltip();
+        n.ButtonLogout(".btn-logout", "#form-logout");
+        n.ButtonTogglePassword(".btn-toggle-password");
+    }
+
+    // Button Logout
+    n.ButtonLogout = (button, form) => {
+        $(document).on("click", button, function(e) {
+            e.preventDefault();
+            var ask = confirm("Anda yakin ingin keluar?");
+            if(ask) {
+                $(form).submit();
+            }
+        });
+    }
+
+    // Button Toggle Password
+    n.ButtonTogglePassword = (button) => {
+        $(document).on("click", button, function(e) {
+            e.preventDefault();
+            var type = $(this).parents(".input-group").find("input").attr("type");
+            var icon = $(this).parents(".input-group").find("i").attr("class");
+            type === "password" ? $(this).parents(".input-group").find("input").attr("type","text") : $(this).parents(".input-group").find("input").attr("type","password");
+            icon === "bi-eye" ? $(this).parents(".input-group").find("i").attr("class","bi-eye-slash") : $(this).parents(".input-group").find("i").attr("class","bi-eye");
+        });
+    }
+
+    // Bootstrap Tooltip
+    n.Tooltip = () => {
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+        tooltipTriggerList.map(function (tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl);
+        });
+    }
+
     // DataTable
     n.DataTable = (selector) => {
         var datatable = $(selector).DataTable({
