@@ -101,6 +101,8 @@ var Spandiv = Spandiv || {};
                 "processing": "Memproses data..."
             },
             // "fnDrawCallback": configFnDrawCallback,
+            "aLengthMenu": [[10, 25, 50, 100, -1], [10, 25, 50, 100, "Semua"]],
+            "pageLength": 10,
             columnDefs: [
                 {orderable: false, targets: 0},
                 {orderable: false, targets: -1},
