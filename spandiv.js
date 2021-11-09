@@ -22,11 +22,8 @@ var Spandiv = Spandiv || {};
         $(document).on("click", button, function(e) {
             e.preventDefault();
             var id = $(this).data("id");
-            var ask = confirm("Anda yakin ingin menghapus data ini?");
-            if(ask) {
-                $(form).find("input[name=id]").val(id);
-                $(form).submit();
-            }
+            $(form).find("input[name=id]").val(id);
+            n.SwalWarning("Anda yakin ingin menghapus data ini?", form);
         });
     }
 
@@ -34,10 +31,7 @@ var Spandiv = Spandiv || {};
     n.ButtonLogout = (button, form) => {
         $(document).on("click", button, function(e) {
             e.preventDefault();
-            var ask = confirm("Anda yakin ingin keluar?");
-            if(ask) {
-                $(form).submit();
-            }
+            n.SwalWarning("Anda yakin ingin keluar?", form);
         });
     }
 
@@ -80,6 +74,24 @@ var Spandiv = Spandiv || {};
         $(selector).find(".toast-body").text(message);
         var toast = new bootstrap.Toast(document.querySelector(selector));
         toast.show();
+    }
+
+    // SweetAlert2 Warning
+    n.SwalWarning = (text, form) => {
+        Swal.fire({
+            text: text,
+            icon: "warning",
+            allowOutsideClick: false,
+            showCancelButton: true,
+            confirmButtonText: "Ya",
+            cancelButtonText: "Batal",
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33"
+        }).then((result) => {
+            if(result.isConfirmed) {
+                $(form).submit();
+            }
+        });
     }
 
     // DataTable
