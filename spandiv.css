@@ -11,6 +11,12 @@
     text-align: center;
 }
 
+/* Select2 */
+.select2-container--default .select2-selection--single {
+    border: 1px solid #ced4da!important;
+    border-radius: .1rem!important;
+}
+
 /* Quill Editor */
 .ql-snow p {
     margin-bottom: 0;
