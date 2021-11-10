@@ -1,6 +1,6 @@
 /*
  * Required:
- * JS: JQuery 3.5, Bootstrap 5
+ * JS: JQuery 3.6, Bootstrap 5
  * CSS: Bootstrap 5, Bootstrap Icons
  */
 
@@ -26,8 +26,8 @@ var Spandiv = Spandiv || {};
         "daterangepicker":
             {
                 "css": "https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.css",
-                "js1": "https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js",
-                "js2": "https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"
+                "js1": "https://cdn.jsdelivr.net/momentjs/latest/moment.min.js",
+                "js2": "https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"
             },
         "jqueryui":
             {
@@ -159,35 +159,37 @@ var Spandiv = Spandiv || {};
     // DataTable
     n.DataTable = (selector) => {
         n.AddStylesheet(n.Resources.datatables.css);
-        n.AddScript(n.Resources.datatables.js1);
-        var script = n.AddScript(n.Resources.datatables.js2);
-        script.onload = function() {
-            var datatable = $(selector).DataTable({
-                "language": {
-                    "lengthMenu": "Menampilkan _MENU_ data",
-                    "zeroRecords": "Data tidak tersedia",
-                    "info": "Menampilkan _START_ sampai _END_ dari total _TOTAL_ data",
-                    "infoEmpty": "Data tidak ditemukan",
-                    "infoFiltered": "(Terfilter dari total _MAX_ data)",
-                    "search": "Cari:",
-                    "paginate": {
-                        "first": "Pertama",
-                        "last": "Terakhir",
-                        "previous": "<",
-                        "next": ">",
+        var script1 = n.AddScript(n.Resources.datatables.js1);
+        var script2 = n.AddScript(n.Resources.datatables.js2);
+        script1.onload = function() {
+            script2.onload = function() {
+                var datatable = $(selector).DataTable({
+                    "language": {
+                        "lengthMenu": "Menampilkan _MENU_ data",
+                        "zeroRecords": "Data tidak tersedia",
+                        "info": "Menampilkan _START_ sampai _END_ dari total _TOTAL_ data",
+                        "infoEmpty": "Data tidak ditemukan",
+                        "infoFiltered": "(Terfilter dari total _MAX_ data)",
+                        "search": "Cari:",
+                        "paginate": {
+                            "first": "Pertama",
+                            "last": "Terakhir",
+                            "previous": "<",
+                            "next": ">",
+                        },
+                        "processing": "Memproses data..."
                     },
-                    "processing": "Memproses data..."
-                },
-                // "fnDrawCallback": configFnDrawCallback,
-                "aLengthMenu": [[10, 25, 50, 100, -1], [10, 25, 50, 100, "Semua"]],
-                "pageLength": 10,
-                columnDefs: [
-                    {orderable: false, targets: 0},
-                    {orderable: false, targets: -1},
-                ],
-                order: []
-            });
-            return datatable;
+                    // "fnDrawCallback": configFnDrawCallback,
+                    "aLengthMenu": [[10, 25, 50, 100, -1], [10, 25, 50, 100, "Semua"]],
+                    "pageLength": 10,
+                    columnDefs: [
+                        {orderable: false, targets: 0},
+                        {orderable: false, targets: -1},
+                    ],
+                    order: []
+                });
+                return datatable;
+            }
         }
     }
 
@@ -245,20 +247,22 @@ var Spandiv = Spandiv || {};
     // Daterangepicker
     n.DateRangePicker = (selector, time = {}) => {
         n.AddStylesheet(n.Resources.daterangepicker.css);
-        n.AddScript(n.Resources.daterangepicker.js2);
-        var script = n.AddScript(n.Resources.daterangepicker.js1);
-        script.onload = function() {
-            var daterangepicker =  $(selector).daterangepicker({
-                timePicker: true,
-                timePicker24Hour: true,
-                showDropdowns: true,
-                startDate: time.start !== undefined ? time.start : moment().startOf('hour'),
-                endDate: time.end !== undefined ? time.end : moment().startOf('hour').add(48, 'hour'),
-                locale: {
-                    format: 'DD/MM/YYYY HH:mm'
-                }
-            });
-            return daterangepicker;
+        var script1 = n.AddScript(n.Resources.daterangepicker.js1);
+        var script2 = n.AddScript(n.Resources.daterangepicker.js2);
+        script1.onload = function() {
+            script2.onload = function() {
+                var daterangepicker =  $(selector).daterangepicker({
+                    timePicker: true,
+                    timePicker24Hour: true,
+                    showDropdowns: true,
+                    startDate: time.start !== undefined ? time.start : moment().startOf('hour'),
+                    endDate: time.end !== undefined ? time.end : moment().startOf('hour').add(48, 'hour'),
+                    locale: {
+                        format: 'DD/MM/YYYY HH:mm'
+                    }
+                });
+                return daterangepicker;
+            }
         }
     }
 
