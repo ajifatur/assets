@@ -60,6 +60,9 @@ var Spandiv = Spandiv || {};
 
     // Add Script
     n.AddScript = (src) => {
+        var element = document.querySelector("script[src='" + src + "']");
+        if(element !== null) element.remove();
+
         var script = document.createElement("script");
         script.src = src;
         document.body.appendChild(script);
@@ -68,6 +71,9 @@ var Spandiv = Spandiv || {};
 
     // Add Stylesheet
     n.AddStylesheet = (src) => {
+        var element = document.querySelector("link[href='" + src + "']");
+        if(element !== null) element.remove();
+
         var link = document.createElement("link");
         link.rel = "stylesheet";
         link.href = src;
@@ -303,17 +309,35 @@ var Spandiv = Spandiv || {};
     }
 
     // Sortable
-    n.Sortable = (selector, update) => {
+    n.Sortable = (selector) => {
+        var token = $("input[name=_token]").val();
         var script = n.AddScript(n.Resources.jqueryui.js);
         script.onload = function() {
-            $(selector).sortable({
+            var sortable = $(selector).sortable({
+                items: "> div",
                 placeholder: "ui-state-highlight",
-                start: function(event, ui){
-                    $(".ui-state-highlight").css("height", $(ui.item).outerHeight());
+                start: function(event, ui) {
+                    $(selector).find(".ui-state-highlight").css("height", $(ui.item).outerHeight());
                 },
-                update: update
+                update: function(event, ui) {
+                    var url = $(this).data("url");
+                    var items = $(this).find(".ui-sortable-handle");
+                    var ids = [];
+                    $(items).each(function(key, elem) {
+                        ids.push($(elem).data("id"));
+                    });
+                    $.ajax({
+                        type: "post",
+                        url: url,
+                        data: {_token: token, ids: ids},
+                        success: function(response) {
+                            Spandiv.Toast("#toast-sort", response);
+                        }
+                    });
+                }
             });
             $(selector).disableSelection();
+            return sortable;
         }
     }
 
