@@ -1,7 +1,7 @@
 /*
  * Required:
- * JS: JQuery 3.5, Bootstrap 5, DataTables, Quill Editor, Datepicker, Daterangepicker, Moment JS, JQuery UI
- * CSS: Bootstrap 5, Bootstrap Icons, DataTables, Quill Editor, Datepicker, Daterangepicker
+ * JS: JQuery 3.5, Bootstrap 5
+ * CSS: Bootstrap 5, Bootstrap Icons
  */
 
 
@@ -10,11 +10,69 @@ var Spandiv = Spandiv || {};
 
 // Object inside namespace
 (function(n) {
+    // Resources
+    n.Resources = {
+        "datatables":
+            {
+                "css": "https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap5.min.css",
+                "js1": "https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js",
+                "js2": "https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap5.min.js"
+            },
+        "datepicker":
+            {
+                "css": "https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css",
+                "js" : "https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"
+            },
+        "daterangepicker":
+            {
+                "css": "https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.css",
+                "js1": "https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js",
+                "js2": "https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"
+            },
+        "jqueryui":
+            {
+                "js" : "https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
+            },
+        "quill":
+            {
+                "css": "https://campusdigital.id/assets/plugins/quill/quill.snow.css",
+                "js1": "https://campusdigital.id/assets/plugins/quill/quill.min.js",
+                "js2": "https://cdn.rawgit.com/kensnyder/quill-image-resize-module/3411c9a7/image-resize.min.js"
+            },
+        "select2":
+            {
+                "css": "https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css",
+                "js" : "https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"
+            },
+        "sweetalert2":
+            {
+                "css": "https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css",
+                "js" : "https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"
+            }
+    }
+
     // Enable Everywhere
     n.EnableEverywhere = () => {
         n.Tooltip();
         n.ButtonLogout(".btn-logout", "#form-logout");
         n.ButtonTogglePassword(".btn-toggle-password");
+    }
+
+    // Add Script
+    n.AddScript = (src) => {
+        var script = document.createElement("script");
+        script.src = src;
+        document.body.appendChild(script);
+        return script;
+    }
+
+    // Add Stylesheet
+    n.AddStylesheet = (src) => {
+        var link = document.createElement("link");
+        link.rel = "stylesheet";
+        link.href = src;
+        document.head.appendChild(link);
+        return link;
     }
 
     // Button Delete
@@ -78,117 +136,181 @@ var Spandiv = Spandiv || {};
 
     // SweetAlert2 Warning
     n.SwalWarning = (text, form) => {
-        Swal.fire({
-            text: text,
-            icon: "warning",
-            allowOutsideClick: false,
-            showCancelButton: true,
-            confirmButtonText: "Ya",
-            cancelButtonText: "Batal",
-            confirmButtonColor: "#3085d6",
-            cancelButtonColor: "#d33"
-        }).then((result) => {
-            if(result.isConfirmed) {
-                $(form).submit();
-            }
-        });
+        n.AddStylesheet(n.Resources.sweetalert2.css);
+        var script = n.AddScript(n.Resources.sweetalert2.js);
+        script.onload = function() {
+            Swal.fire({
+                text: text,
+                icon: "warning",
+                allowOutsideClick: false,
+                showCancelButton: true,
+                confirmButtonText: "Ya",
+                cancelButtonText: "Batal",
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33"
+            }).then((result) => {
+                if(result.isConfirmed) {
+                    $(form).submit();
+                }
+            });
+        }
     }
 
     // DataTable
     n.DataTable = (selector) => {
-        var datatable = $(selector).DataTable({
-            "language": {
-                "lengthMenu": "Menampilkan _MENU_ data",
-                "zeroRecords": "Data tidak tersedia",
-                "info": "Menampilkan _START_ sampai _END_ dari total _TOTAL_ data",
-                "infoEmpty": "Data tidak ditemukan",
-                "infoFiltered": "(Terfilter dari total _MAX_ data)",
-                "search": "Cari:",
-                "paginate": {
-                    "first": "Pertama",
-                    "last": "Terakhir",
-                    "previous": "<",
-                    "next": ">",
+        n.AddStylesheet(n.Resources.datatables.css);
+        n.AddScript(n.Resources.datatables.js1);
+        var script = n.AddScript(n.Resources.datatables.js2);
+        script.onload = function() {
+            var datatable = $(selector).DataTable({
+                "language": {
+                    "lengthMenu": "Menampilkan _MENU_ data",
+                    "zeroRecords": "Data tidak tersedia",
+                    "info": "Menampilkan _START_ sampai _END_ dari total _TOTAL_ data",
+                    "infoEmpty": "Data tidak ditemukan",
+                    "infoFiltered": "(Terfilter dari total _MAX_ data)",
+                    "search": "Cari:",
+                    "paginate": {
+                        "first": "Pertama",
+                        "last": "Terakhir",
+                        "previous": "<",
+                        "next": ">",
+                    },
+                    "processing": "Memproses data..."
                 },
-                "processing": "Memproses data..."
-            },
-            // "fnDrawCallback": configFnDrawCallback,
-            "aLengthMenu": [[10, 25, 50, 100, -1], [10, 25, 50, 100, "Semua"]],
-            "pageLength": 10,
-            columnDefs: [
-                {orderable: false, targets: 0},
-                {orderable: false, targets: -1},
-            ],
-            order: []
-        });
-        return datatable;
+                // "fnDrawCallback": configFnDrawCallback,
+                "aLengthMenu": [[10, 25, 50, 100, -1], [10, 25, 50, 100, "Semua"]],
+                "pageLength": 10,
+                columnDefs: [
+                    {orderable: false, targets: 0},
+                    {orderable: false, targets: -1},
+                ],
+                order: []
+            });
+            return datatable;
+        }
     }
 
     // Quill Editor
     n.Quill = (selector) => {
-        var quill;
-        if($(selector).length === 1) {
-            quill = new Quill(selector, {
-                modules: {
-                    toolbar: [
-                        [{'header': [1, 2, 3, 4, 5, 6, false]}],
-                        ['bold', 'italic', 'underline', 'strike'],
-                        [{'script': 'sub'}, {'script': 'super'}],
-                        ['link', 'image'],
-                        [{'list': 'ordered'}, {'list': 'bullet'}],
-                        [{'align': [] }],
-                        [{'indent': '-1'}, {'indent': '+1'}],
-                        [{'direction': 'rtl'}],
-                        [{'color': []}, {'background': []}],
-                        ['clean']
-                    ],
-                    imageResize: {
-                        displaySize: true
-                    }
-                },
-                placeholder: 'Tulis sesuatu...',
-                theme: 'snow',
-                readOnly: false
-            });
+        n.AddStylesheet(n.Resources.quill.css);
+        var script1 = n.AddScript(n.Resources.quill.js1);
+        var script2 = n.AddScript(n.Resources.quill.js2);
+        script1.onload = function() {
+            script2.onload = function() {
+                var quill;
+                if($(selector).length === 1) {
+                    quill = new Quill(selector, {
+                        modules: {
+                            toolbar: [
+                                [{'header': [1, 2, 3, 4, 5, 6, false]}],
+                                ['bold', 'italic', 'underline', 'strike'],
+                                [{'script': 'sub'}, {'script': 'super'}],
+                                ['link', 'image'],
+                                [{'list': 'ordered'}, {'list': 'bullet'}],
+                                [{'align': [] }],
+                                [{'indent': '-1'}, {'indent': '+1'}],
+                                [{'direction': 'rtl'}],
+                                [{'color': []}, {'background': []}],
+                                ['clean']
+                            ],
+                            imageResize: {
+                                displaySize: true
+                            }
+                        },
+                        placeholder: 'Tulis sesuatu...',
+                        theme: 'snow',
+                        readOnly: false
+                    });
+                }
+                return quill;
+            }
         }
-        return quill;
     }
 
     // Datepicker
     n.DatePicker = (selector) => {
-        var datepicker = $(selector).datepicker({
-            format: "dd/mm/yyyy",
-            todayHighlight: true,
-            autoclose: true
-        });
-        return datepicker;
+        n.AddStylesheet(n.Resources.datepicker.css);
+        var script = n.AddScript(n.Resources.datepicker.js);
+        script.onload = function() {
+            var datepicker = $(selector).datepicker({
+                format: "dd/mm/yyyy",
+                todayHighlight: true,
+                autoclose: true
+            });
+            return datepicker;
+        };
     }
 
     // Daterangepicker
     n.DateRangePicker = (selector, time = {}) => {
-        var daterangepicker =  $(selector).daterangepicker({
-            timePicker: true,
-            timePicker24Hour: true,
-            showDropdowns: true,
-            startDate: time.start !== undefined ? time.start : moment().startOf('hour'),
-            endDate: time.end !== undefined ? time.end : moment().startOf('hour').add(48, 'hour'),
-            locale: {
-                format: 'DD/MM/YYYY HH:mm'
-            }
+        n.AddStylesheet(n.Resources.daterangepicker.css);
+        n.AddScript(n.Resources.daterangepicker.js2);
+        var script = n.AddScript(n.Resources.daterangepicker.js1);
+        script.onload = function() {
+            var daterangepicker =  $(selector).daterangepicker({
+                timePicker: true,
+                timePicker24Hour: true,
+                showDropdowns: true,
+                startDate: time.start !== undefined ? time.start : moment().startOf('hour'),
+                endDate: time.end !== undefined ? time.end : moment().startOf('hour').add(48, 'hour'),
+                locale: {
+                    format: 'DD/MM/YYYY HH:mm'
+                }
+            });
+            return daterangepicker;
+        }
+    }
+
+    // Select2
+    n.Select2 = (selector) => {
+        n.AddStylesheet(n.Resources.select2.css);
+        var script = n.AddScript(n.Resources.select2.js);
+        script.onload = function() {
+            var select2 = $(selector).select2({
+                width: 'resolve',
+                allowClear: true
+            });
+            return select2;
+        };
+    }
+
+    // Select2 Server Side
+    n.Select2ServerSide = (selector, conf) => {
+        $(window).on("load", function() {
+            var key = conf.value;
+            $.ajax({
+                type: "get",
+                url: conf.url,
+                success: function(response) {
+                    var html = '<option value="" disabled selected>--Pilih--</option>';
+                    for(var i = 0; i < response.length; i++) {
+                        var selected = (key === response[i][conf.valueProp]) ? 'selected' : '';
+                        if(conf.bracketProp !== undefined)
+                            html += '<option value="' + response[i][conf.valueProp] + '" ' + selected + '>' + response[i][conf.nameProp] + ' (' + response[i][conf.bracketProp] + ')' + '</option>';
+                        else
+                            html += '<option value="' + response[i][conf.valueProp] + '" ' + selected + '>' + response[i][conf.nameProp] + '</option>';
+                    }
+                    $(selector).html(html);
+                }
+            });
         });
-        return daterangepicker;
+        return n.Select2(selector);
     }
 
     // Sortable
     n.Sortable = (selector, update) => {
-        $(selector).sortable({
-            placeholder: "ui-state-highlight",
-            start: function(event, ui){
-                $(".ui-state-highlight").css("height", $(ui.item).outerHeight());
-            },
-            update: update
-        });
-        $(selector).disableSelection();
+        var script = n.AddScript(n.Resources.jqueryui.js);
+        script.onload = function() {
+            $(selector).sortable({
+                placeholder: "ui-state-highlight",
+                start: function(event, ui){
+                    $(".ui-state-highlight").css("height", $(ui.item).outerHeight());
+                },
+                update: update
+            });
+            $(selector).disableSelection();
+        }
     }
 
 })(Spandiv);
