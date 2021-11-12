@@ -7,6 +7,9 @@
 }
 
 /* DataTable */
+.dataTable {
+    width: 100%!important;
+}
 .dataTable thead tr th {
     text-align: center;
 }
