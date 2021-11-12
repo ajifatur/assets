@@ -15,8 +15,10 @@ var Spandiv = Spandiv || {};
         "datatables":
             {
                 "css": "https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap5.min.css",
-                "js1": "https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js",
-                "js2": "https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap5.min.js"
+                "js" : [
+                    "https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js",
+                    "https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap5.min.js"
+                ]
             },
         "datepicker":
             {
@@ -26,8 +28,10 @@ var Spandiv = Spandiv || {};
         "daterangepicker":
             {
                 "css": "https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.css",
-                "js1": "https://cdn.jsdelivr.net/momentjs/latest/moment.min.js",
-                "js2": "https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"
+                "js" : [
+                    "https://cdn.jsdelivr.net/momentjs/latest/moment.min.js",
+                    "https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"
+                ]
             },
         "jqueryui":
             {
@@ -36,8 +40,10 @@ var Spandiv = Spandiv || {};
         "quill":
             {
                 "css": "https://campusdigital.id/assets/plugins/quill/quill.snow.css",
-                "js1": "https://campusdigital.id/assets/plugins/quill/quill.min.js",
-                "js2": "https://cdn.rawgit.com/kensnyder/quill-image-resize-module/3411c9a7/image-resize.min.js"
+                "js" : [
+                    "https://campusdigital.id/assets/plugins/quill/quill.min.js",
+                    "https://cdn.rawgit.com/kensnyder/quill-image-resize-module/3411c9a7/image-resize.min.js"
+                ]
             },
         "select2":
             {
@@ -58,15 +64,45 @@ var Spandiv = Spandiv || {};
         n.ButtonTogglePassword(".btn-toggle-password");
     }
 
-    // Add Script
-    n.AddScript = (src) => {
-        var element = document.querySelector("script[src='" + src + "']");
-        if(element !== null) element.remove();
+    // // Add Script
+    // n.AddScript = (src) => {
+    //     var element = document.querySelector("script[src='" + src + "']");
+    //     if(element !== null) element.remove();
 
-        var script = document.createElement("script");
-        script.src = src;
-        document.body.appendChild(script);
-        return script;
+    //     var script = document.createElement("script");
+    //     script.type = "text/javascript";
+    //     script.src = src;
+    //     document.body.appendChild(script);
+    //     return script;
+    // }
+
+    // Add Scripts
+    n.AddScripts = (src, onSuccess) => {
+        var pending = [];
+		src = [].concat(src);
+
+        // Loop scripts
+        for(i=0; i<src.length; i++) {
+            var element = document.querySelector("script[src='" + src[i] + "']");
+            if(element !== null) element.remove();
+
+            var script = document.createElement("script");
+            script.type = "text/javascript";
+            script.src = src[i];
+            script.onload = onLoad;
+            document.body.appendChild(script);
+            pending.push(src[i]);
+        }
+
+        // On load
+        function onLoad() {
+			if(!this.readyState || this.readyState === "loaded" || this.readyState === "complete") {
+				pending.splice(pending.indexOf(this.src), 1);
+				if(!pending.length) {
+					onSuccess();
+				}
+			}
+        }
     }
 
     // Add Stylesheet
@@ -143,8 +179,7 @@ var Spandiv = Spandiv || {};
     // SweetAlert2 Warning
     n.SwalWarning = (text, form) => {
         n.AddStylesheet(n.Resources.sweetalert2.css);
-        var script = n.AddScript(n.Resources.sweetalert2.js);
-        script.onload = function() {
+        n.AddScripts(n.Resources.sweetalert2.js, function() {
             Swal.fire({
                 text: text,
                 icon: "warning",
@@ -159,177 +194,158 @@ var Spandiv = Spandiv || {};
                     $(form).submit();
                 }
             });
-        }
+        });
     }
 
     // DataTable
     n.DataTable = (selector) => {
         n.AddStylesheet(n.Resources.datatables.css);
-        var script1 = n.AddScript(n.Resources.datatables.js1);
-        var script2 = n.AddScript(n.Resources.datatables.js2);
-        script1.onload = function() {
-            script2.onload = function() {
-                var datatable = $(selector).DataTable({
-                    "language": {
-                        "lengthMenu": "Menampilkan _MENU_ data",
-                        "zeroRecords": "Data tidak tersedia",
-                        "info": "Menampilkan _START_ sampai _END_ dari total _TOTAL_ data",
-                        "infoEmpty": "Data tidak ditemukan",
-                        "infoFiltered": "(Terfilter dari total _MAX_ data)",
-                        "search": "Cari:",
-                        "paginate": {
-                            "first": "Pertama",
-                            "last": "Terakhir",
-                            "previous": "<",
-                            "next": ">",
-                        },
-                        "processing": "Memproses data..."
+        n.AddScripts(n.Resources.datatables.js, function() {
+            var datatable = $(selector).DataTable({
+                "language": {
+                    "lengthMenu": "Menampilkan _MENU_ data",
+                    "zeroRecords": "Data tidak tersedia",
+                    "info": "Menampilkan _START_ sampai _END_ dari total _TOTAL_ data",
+                    "infoEmpty": "Data tidak ditemukan",
+                    "infoFiltered": "(Terfilter dari total _MAX_ data)",
+                    "search": "Cari:",
+                    "paginate": {
+                        "first": "Pertama",
+                        "last": "Terakhir",
+                        "previous": "<",
+                        "next": ">",
                     },
-                    // "fnDrawCallback": configFnDrawCallback,
-                    "aLengthMenu": [[10, 25, 50, 100, -1], [10, 25, 50, 100, "Semua"]],
-                    "pageLength": 10,
-                    columnDefs: [
-                        {orderable: false, targets: 0},
-                        {orderable: false, targets: -1},
-                    ],
-                    order: []
-                });
-                return datatable;
-            }
-        }
+                    "processing": "Memproses data..."
+                },
+                // "fnDrawCallback": configFnDrawCallback,
+                "aLengthMenu": [[10, 25, 50, 100, -1], [10, 25, 50, 100, "Semua"]],
+                "pageLength": 10,
+                columnDefs: [
+                    {orderable: false, targets: 0},
+                    {orderable: false, targets: -1},
+                ],
+                order: []
+            });
+            return datatable;
+        });
     }
 
     // DataTable Server Side
     n.DataTableServerSide = (selector, conf) => {
         n.AddStylesheet(n.Resources.datatables.css);
-        var script1 = n.AddScript(n.Resources.datatables.js1);
-        var script2 = n.AddScript(n.Resources.datatables.js2);
-        script1.onload = function() {
-            script2.onload = function() {
-                var datatable = $(selector).DataTable({
-                    processing: true,
-                    serverSide: true,
-                    ajax: conf.url,
-                    columns: conf.columns,
-                    "language": {
-                        "lengthMenu": "Menampilkan _MENU_ data",
-                        "zeroRecords": "Data tidak tersedia",
-                        "info": "Menampilkan _START_ sampai _END_ dari total _TOTAL_ data",
-                        "infoEmpty": "Data tidak ditemukan",
-                        "infoFiltered": "(Terfilter dari total _MAX_ data)",
-                        "search": "Cari:",
-                        "paginate": {
-                            "first": "Pertama",
-                            "last": "Terakhir",
-                            "previous": "<",
-                            "next": ">",
-                        },
-                        "processing": "Memproses data..."
+        n.AddScripts(n.Resources.datatables.js, function() {
+            var datatable = $(selector).DataTable({
+                processing: true,
+                serverSide: true,
+                ajax: conf.url,
+                columns: conf.columns,
+                "language": {
+                    "lengthMenu": "Menampilkan _MENU_ data",
+                    "zeroRecords": "Data tidak tersedia",
+                    "info": "Menampilkan _START_ sampai _END_ dari total _TOTAL_ data",
+                    "infoEmpty": "Data tidak ditemukan",
+                    "infoFiltered": "(Terfilter dari total _MAX_ data)",
+                    "search": "Cari:",
+                    "paginate": {
+                        "first": "Pertama",
+                        "last": "Terakhir",
+                        "previous": "<",
+                        "next": ">",
                     },
-                    // "fnDrawCallback": configFnDrawCallback,
-                    "aLengthMenu": [[10, 25, 50, 100, -1], [10, 25, 50, 100, "Semua"]],
-                    "pageLength": 10,
-                    columnDefs: [
-                        {orderable: false, targets: 0},
-                        {orderable: false, targets: -1},
-                    ],
-                    order: [conf.order]
-                });
-                
-                datatable.on('draw.dt', function() {
-                    n.Tooltip();
-                    // $(selector).addClass("ssp");
-                });
-                
-                return datatable;
-            }
-        }
+                    "processing": "Memproses data..."
+                },
+                // "fnDrawCallback": configFnDrawCallback,
+                "aLengthMenu": [[10, 25, 50, 100, -1], [10, 25, 50, 100, "Semua"]],
+                "pageLength": 10,
+                columnDefs: [
+                    {orderable: false, targets: 0},
+                    {orderable: false, targets: -1},
+                ],
+                order: [conf.order]
+            });
+            
+            datatable.on('draw.dt', function() {
+                n.Tooltip();
+            });
+            
+            return datatable;
+        });
     }
 
     // Quill Editor
     n.Quill = (selector) => {
         n.AddStylesheet(n.Resources.quill.css);
-        var script1 = n.AddScript(n.Resources.quill.js1);
-        var script2 = n.AddScript(n.Resources.quill.js2);
-        script1.onload = function() {
-            script2.onload = function() {
-                var quill;
-                if($(selector).length === 1) {
-                    quill = new Quill(selector, {
-                        modules: {
-                            toolbar: [
-                                [{'header': [1, 2, 3, 4, 5, 6, false]}],
-                                ['bold', 'italic', 'underline', 'strike'],
-                                [{'script': 'sub'}, {'script': 'super'}],
-                                ['link', 'image'],
-                                [{'list': 'ordered'}, {'list': 'bullet'}],
-                                [{'align': [] }],
-                                [{'indent': '-1'}, {'indent': '+1'}],
-                                [{'direction': 'rtl'}],
-                                [{'color': []}, {'background': []}],
-                                ['clean']
-                            ],
-                            imageResize: {
-                                displaySize: true
-                            }
-                        },
-                        placeholder: 'Tulis sesuatu...',
-                        theme: 'snow',
-                        readOnly: false
-                    });
-                }
-                return quill;
+        n.AddScripts(n.Resources.quill.js, function() {
+            var quill;
+            if($(selector).length === 1) {
+                quill = new Quill(selector, {
+                    modules: {
+                        toolbar: [
+                            [{'header': [1, 2, 3, 4, 5, 6, false]}],
+                            ['bold', 'italic', 'underline', 'strike'],
+                            [{'script': 'sub'}, {'script': 'super'}],
+                            ['link', 'image'],
+                            [{'list': 'ordered'}, {'list': 'bullet'}],
+                            [{'align': [] }],
+                            [{'indent': '-1'}, {'indent': '+1'}],
+                            [{'direction': 'rtl'}],
+                            [{'color': []}, {'background': []}],
+                            ['clean']
+                        ],
+                        imageResize: {
+                            displaySize: true
+                        }
+                    },
+                    placeholder: 'Tulis sesuatu...',
+                    theme: 'snow',
+                    readOnly: false
+                });
             }
-        }
+            return quill;
+        });
     }
 
     // Datepicker
     n.DatePicker = (selector) => {
         n.AddStylesheet(n.Resources.datepicker.css);
-        var script = n.AddScript(n.Resources.datepicker.js);
-        script.onload = function() {
+        n.AddScripts(n.Resources.datepicker.js, function() {
             var datepicker = $(selector).datepicker({
                 format: "dd/mm/yyyy",
                 todayHighlight: true,
                 autoclose: true
             });
             return datepicker;
-        };
+        });
     }
 
     // Daterangepicker
     n.DateRangePicker = (selector, time = {}) => {
         n.AddStylesheet(n.Resources.daterangepicker.css);
-        var script1 = n.AddScript(n.Resources.daterangepicker.js1);
-        var script2 = n.AddScript(n.Resources.daterangepicker.js2);
-        script1.onload = function() {
-            script2.onload = function() {
-                var daterangepicker =  $(selector).daterangepicker({
-                    timePicker: true,
-                    timePicker24Hour: true,
-                    showDropdowns: true,
-                    startDate: time.start !== undefined ? time.start : moment().startOf('hour'),
-                    endDate: time.end !== undefined ? time.end : moment().startOf('hour').add(48, 'hour'),
-                    locale: {
-                        format: 'DD/MM/YYYY HH:mm'
-                    }
-                });
-                return daterangepicker;
-            }
-        }
+        n.AddScripts(n.Resources.daterangepicker.js, function() {
+            var daterangepicker =  $(selector).daterangepicker({
+                timePicker: true,
+                timePicker24Hour: true,
+                showDropdowns: true,
+                startDate: time.start !== undefined ? time.start : moment().startOf('hour'),
+                endDate: time.end !== undefined ? time.end : moment().startOf('hour').add(48, 'hour'),
+                locale: {
+                    format: 'DD/MM/YYYY HH:mm'
+                }
+            });
+            return daterangepicker;
+        });
     }
 
     // Select2
     n.Select2 = (selector) => {
         n.AddStylesheet(n.Resources.select2.css);
-        var script = n.AddScript(n.Resources.select2.js);
-        script.onload = function() {
+        n.AddScripts(n.Resources.select2.js, function() {
             var select2 = $(selector).select2({
                 width: 'resolve',
                 allowClear: true
             });
             return select2;
-        };
+        });
     }
 
     // Select2 Server Side
@@ -358,8 +374,7 @@ var Spandiv = Spandiv || {};
     // Sortable
     n.Sortable = (selector) => {
         var token = $("input[name=_token]").val();
-        var script = n.AddScript(n.Resources.jqueryui.js);
-        script.onload = function() {
+        n.AddScripts(n.Resources.jqueryui.js, function() {
             var sortable = $(selector).sortable({
                 items: "> div",
                 placeholder: "ui-state-highlight",
@@ -385,7 +400,7 @@ var Spandiv = Spandiv || {};
             });
             $(selector).disableSelection();
             return sortable;
-        }
+        });
     }
 
 })(Spandiv);
