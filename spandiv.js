@@ -160,6 +160,22 @@ var Spandiv = Spandiv || {};
         });
     }
 
+    // Generate URL
+    n.URL(url, params = {}) {
+        if(Object.keys(params).length === 0)
+            return url;
+        else {
+            var keys = Object.keys(params);
+            var values = Object.values(params);
+            var query = "";
+            for(i=0; i<keys.length; i++) {
+                query += keys[i] + "=" + values[i];
+                if(i + 1 !== keys.length) query += "&";
+            }
+            return url + "?" + query;
+        }
+    }
+
     // Bootstrap Tooltip
     n.Tooltip = () => {
         var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
