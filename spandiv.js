@@ -12,49 +12,46 @@ var Spandiv = Spandiv || {};
 (function(n) {
     // Resources
     n.Resources = {
-        "datatables":
-            {
-                "css": "https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap5.min.css",
-                "js" : [
-                    "https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js",
-                    "https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap5.min.js"
-                ]
-            },
-        "datepicker":
-            {
-                "css": "https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css",
-                "js" : "https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"
-            },
-        "daterangepicker":
-            {
-                "css": "https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.css",
-                "js" : [
-                    "https://cdn.jsdelivr.net/momentjs/latest/moment.min.js",
-                    "https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"
-                ]
-            },
-        "jqueryui":
-            {
-                "js" : "https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
-            },
-        "quill":
-            {
-                "css": "https://campusdigital.id/assets/plugins/quill/quill.snow.css",
-                "js" : [
-                    "https://campusdigital.id/assets/plugins/quill/quill.min.js",
-                    "https://cdn.rawgit.com/kensnyder/quill-image-resize-module/3411c9a7/image-resize.min.js"
-                ]
-            },
-        "select2":
-            {
-                "css": "https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css",
-                "js" : "https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"
-            },
-        "sweetalert2":
-            {
-                "css": "https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css",
-                "js" : "https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"
-            }
+        "clockpicker": {
+            "css": "https://cdnjs.cloudflare.com/ajax/libs/clockpicker/0.0.7/bootstrap-clockpicker.min.css",
+            "js" : "https://cdnjs.cloudflare.com/ajax/libs/clockpicker/0.0.7/bootstrap-clockpicker.min.js"
+        },
+        "datatables": {
+            "css": "https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap5.min.css",
+            "js" : [
+                "https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js",
+                "https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap5.min.js"
+            ]
+        },
+        "datepicker": {
+            "css": "https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css",
+            "js" : "https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"
+        },
+        "daterangepicker": {
+            "css": "https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.css",
+            "js" : [
+                "https://cdn.jsdelivr.net/momentjs/latest/moment.min.js",
+                "https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"
+            ]
+        },
+        "jqueryui": {
+            "js" : "https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
+        },
+        "quill": {
+            "css": "https://campusdigital.id/assets/plugins/quill/quill.snow.css",
+            "js" : [
+                "https://campusdigital.id/assets/plugins/quill/quill.min.js",
+                "https://cdn.rawgit.com/kensnyder/quill-image-resize-module/3411c9a7/image-resize.min.js"
+            ]
+        },
+        "select2": {
+            "css": "https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css",
+            "js" : "https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"
+        },
+        "sweetalert2": {
+            "css": "https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css",
+            "js" : "https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"
+        }
     }
 
     // Enable Everywhere
@@ -64,57 +61,54 @@ var Spandiv = Spandiv || {};
         n.ButtonTogglePassword(".btn-toggle-password");
     }
 
-    // // Add Script
-    // n.AddScript = (src) => {
-    //     var element = document.querySelector("script[src='" + src + "']");
-    //     if(element !== null) element.remove();
-
-    //     var script = document.createElement("script");
-    //     script.type = "text/javascript";
-    //     script.src = src;
-    //     document.body.appendChild(script);
-    //     return script;
-    // }
-
-    // Add Scripts
-    n.AddScripts = (src, onSuccess) => {
+    // Load Resources
+    n.LoadResources = (resources, onSuccess) => {
         var pending = [];
-		src = [].concat(src);
 
-        // Loop scripts
-        for(i=0; i<src.length; i++) {
-            var element = document.querySelector("script[src='" + src[i] + "']");
-            if(element !== null) element.remove();
+        if(resources.css !== undefined) {
+            var src = [].concat(resources.css);
 
-            var script = document.createElement("script");
-            script.type = "text/javascript";
-            script.src = src[i];
-            script.onload = onLoad;
-            document.body.appendChild(script);
-            pending.push(src[i]);
+            // Loop stylesheets
+            for(i=0; i<src.length; i++) {
+                var element = document.querySelector("link[href='" + src + "']");
+                if(element !== null) element.remove();
+
+                var link = document.createElement("link");
+                link.rel = "stylesheet";
+                link.href = src;
+                link.onload = onLoad;
+                document.head.appendChild(link);
+                pending.push(src[i]);
+            }
+        }
+
+        if(resources.js !== undefined) {
+            var src = [].concat(resources.js);
+
+            // Loop scripts
+            for(i=0; i<src.length; i++) {
+                var element = document.querySelector("script[src='" + src[i] + "']");
+                if(element !== null) element.remove();
+    
+                var script = document.createElement("script");
+                script.type = "text/javascript";
+                script.src = src[i];
+                script.onload = onLoad;
+                document.body.appendChild(script);
+                pending.push(src[i]);
+            }
         }
 
         // On load
         function onLoad() {
 			if(!this.readyState || this.readyState === "loaded" || this.readyState === "complete") {
-				pending.splice(pending.indexOf(this.src), 1);
+                if(this.href !== undefined) pending.splice(pending.indexOf(this.href), 1);
+                if(this.src !== undefined) pending.splice(pending.indexOf(this.src), 1);
 				if(!pending.length) {
 					onSuccess();
 				}
 			}
         }
-    }
-
-    // Add Stylesheet
-    n.AddStylesheet = (src) => {
-        var element = document.querySelector("link[href='" + src + "']");
-        if(element !== null) element.remove();
-
-        var link = document.createElement("link");
-        link.rel = "stylesheet";
-        link.href = src;
-        document.head.appendChild(link);
-        return link;
     }
 
     // Button Delete
@@ -194,8 +188,7 @@ var Spandiv = Spandiv || {};
 
     // SweetAlert2 Warning
     n.SwalWarning = (text, form) => {
-        n.AddStylesheet(n.Resources.sweetalert2.css);
-        n.AddScripts(n.Resources.sweetalert2.js, function() {
+        n.LoadResources(n.Resources.sweetalert2, function() {
             Swal.fire({
                 text: text,
                 icon: "warning",
@@ -215,8 +208,7 @@ var Spandiv = Spandiv || {};
 
     // DataTable
     n.DataTable = (selector) => {
-        n.AddStylesheet(n.Resources.datatables.css);
-        n.AddScripts(n.Resources.datatables.js, function() {
+        n.LoadResources(n.Resources.datatables, function() {
             var datatable = $(selector).DataTable({
                 "language": {
                     "lengthMenu": "Menampilkan _MENU_ data",
@@ -248,8 +240,7 @@ var Spandiv = Spandiv || {};
 
     // DataTable Server Side
     n.DataTableServerSide = (selector, conf) => {
-        n.AddStylesheet(n.Resources.datatables.css);
-        n.AddScripts(n.Resources.datatables.js, function() {
+        n.LoadResources(n.Resources.datatables, function() {
             var datatable = $(selector).DataTable({
                 processing: true,
                 serverSide: true,
@@ -290,8 +281,7 @@ var Spandiv = Spandiv || {};
 
     // Quill Editor
     n.Quill = (selector) => {
-        n.AddStylesheet(n.Resources.quill.css);
-        n.AddScripts(n.Resources.quill.js, function() {
+        n.LoadResources(n.Resources.quill, function() {
             var quill;
             if($(selector).length === 1) {
                 quill = new Quill(selector, {
@@ -323,8 +313,7 @@ var Spandiv = Spandiv || {};
 
     // Datepicker
     n.DatePicker = (selector) => {
-        n.AddStylesheet(n.Resources.datepicker.css);
-        n.AddScripts(n.Resources.datepicker.js, function() {
+        n.LoadResources(n.Resources.datepicker, function() {
             var datepicker = $(selector).datepicker({
                 format: "dd/mm/yyyy",
                 todayHighlight: true,
@@ -336,8 +325,7 @@ var Spandiv = Spandiv || {};
 
     // Daterangepicker
     n.DateRangePicker = (selector, time = {}) => {
-        n.AddStylesheet(n.Resources.daterangepicker.css);
-        n.AddScripts(n.Resources.daterangepicker.js, function() {
+        n.LoadResources(n.Resources.daterangepicker, function() {
             var daterangepicker =  $(selector).daterangepicker({
                 timePicker: true,
                 timePicker24Hour: true,
@@ -352,10 +340,19 @@ var Spandiv = Spandiv || {};
         });
     }
 
+    // ClockPicker
+    n.ClockPicker = (selector) => {
+        n.LoadResources(n.Resources.clockpicker, function() {
+            var clockpicker = $(selector).clockpicker({
+                autoclose: true
+            });
+            return clockpicker;
+        });
+    }
+
     // Select2
     n.Select2 = (selector) => {
-        n.AddStylesheet(n.Resources.select2.css);
-        n.AddScripts(n.Resources.select2.js, function() {
+        n.LoadResources(n.Resources.select2, function() {
             var select2 = $(selector).select2({
                 width: 'resolve',
                 allowClear: true
@@ -390,7 +387,7 @@ var Spandiv = Spandiv || {};
     // Sortable
     n.Sortable = (selector) => {
         var token = $("input[name=_token]").val();
-        n.AddScripts(n.Resources.jqueryui.js, function() {
+        n.LoadResources(n.Resources.jqueryui, function() {
             var sortable = $(selector).sortable({
                 items: "> div",
                 placeholder: "ui-state-highlight",
