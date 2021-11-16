@@ -161,7 +161,7 @@ var Spandiv = Spandiv || {};
     }
 
     // Generate URL
-    n.URL(url, params = {}) {
+    n.URL = (url, params = {}) => {
         if(Object.keys(params).length === 0)
             return url;
         else {
