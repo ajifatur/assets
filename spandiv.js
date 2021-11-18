@@ -17,7 +17,7 @@ var Spandiv = Spandiv || {};
             "js" : "https://cdnjs.cloudflare.com/ajax/libs/clockpicker/0.0.7/bootstrap-clockpicker.min.js"
         },
         "datatables": {
-            "css": "https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap5.min.css",
+            // "css": "https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap5.min.css",
             "js" : [
                 "https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js",
                 "https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap5.min.js"
