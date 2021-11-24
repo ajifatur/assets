@@ -17,7 +17,6 @@ var Spandiv = Spandiv || {};
             "js" : "https://cdnjs.cloudflare.com/ajax/libs/clockpicker/0.0.7/bootstrap-clockpicker.min.js"
         },
         "datatables": {
-            // "css": "https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap5.min.css",
             "js" : [
                 "https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js",
                 "https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap5.min.js"
@@ -64,38 +63,30 @@ var Spandiv = Spandiv || {};
     // Load Resources
     n.LoadResources = (resources, onSuccess) => {
         var pending = [];
+        var css = [].concat(resources.css);
+        var js = [].concat(resources.js);
 
         if(resources.css !== undefined) {
-            var src = [].concat(resources.css);
-
             // Loop stylesheets
-            for(i=0; i<src.length; i++) {
-                var element = document.querySelector("link[href='" + src + "']");
-                if(element !== null) element.remove();
-
+            for(i=0; i<css.length; i++) {
                 var link = document.createElement("link");
                 link.rel = "stylesheet";
-                link.href = src;
+                link.href = css;
                 link.onload = onLoad;
                 document.head.appendChild(link);
-                pending.push(src[i]);
+                pending.push(css[i]);
             }
         }
 
         if(resources.js !== undefined) {
-            var src = [].concat(resources.js);
-
             // Loop scripts
-            for(i=0; i<src.length; i++) {
-                var element = document.querySelector("script[src='" + src[i] + "']");
-                if(element !== null) element.remove();
-    
+            for(i=0; i<js.length; i++) {    
                 var script = document.createElement("script");
                 script.type = "text/javascript";
-                script.src = src[i];
+                script.src = js[i];
                 script.onload = onLoad;
                 document.body.appendChild(script);
-                pending.push(src[i]);
+                pending.push(js[i]);
             }
         }
 
@@ -106,8 +97,36 @@ var Spandiv = Spandiv || {};
                 if(this.src !== undefined) pending.splice(pending.indexOf(this.src), 1);
 				if(!pending.length) {
 					onSuccess();
+                    removeElements();
 				}
 			}
+        }
+
+        // Remove duplicate elements
+        function removeElements() {
+            // Remove duplicate stylesheets
+            if(css.length > 0) {
+                for(i=0; i<css.length; i++) {
+                    var elements = document.querySelectorAll("link[href='" + css[i] + "']");
+                    if(elements.length > 1) {
+                        for(j=1; j<elements.length; j++) {
+                            elements[j].remove();
+                        }
+                    }
+                }
+            }
+
+            // Remove duplicate scripts
+            if(js.length > 0) {
+                for(i=0; i<js.length; i++) {
+                    var elements = document.querySelectorAll("script[src='" + js[i] + "']");
+                    if(elements.length > 1) {
+                        for(j=1; j<elements.length; j++) {
+                            elements[j].remove();
+                        }
+                    }
+                }
+            }
         }
     }
 
