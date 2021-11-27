@@ -5,6 +5,19 @@
  */
 
 
+$.fn.datepicker.dates['id'] = {
+    days: ["Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jum'at", "Sabtu"],
+    daysShort: ["Min", "Sen", "Sel", "Rab", "Kam", "Jum", "Sab"],
+    daysMin: ["Mi", "Sn", "Sl", "Ra", "Ka", "Ju", "Sa"],
+    months: ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"],
+    monthsShort: ["Jan", "Feb", "Mar", "Apr", "Mei", "Jun", "Jul", "Agu", "Sep", "Okt", "Nov", "Des"],
+    today: "Hari Ini",
+    clear: "Hapus",
+    format: "dd/mm/yyyy",
+    titleFormat: "MM yyyy", /* Leverages same syntax as 'format' */
+    weekStart: 0
+};
+
 // Call the namespace
 var Spandiv = Spandiv || {};
 
@@ -334,6 +347,7 @@ var Spandiv = Spandiv || {};
     n.DatePicker = (selector) => {
         n.LoadResources(n.Resources.datepicker, function() {
             var datepicker = $(selector).datepicker({
+		language: "id",
                 format: "dd/mm/yyyy",
                 todayHighlight: true,
                 autoclose: true
