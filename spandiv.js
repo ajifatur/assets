@@ -71,7 +71,7 @@ var Spandiv = Spandiv || {};
             for(i=0; i<css.length; i++) {
                 var link = document.createElement("link");
                 link.rel = "stylesheet";
-                link.href = css;
+                link.href = css[i];
                 link.onload = onLoad;
                 document.head.appendChild(link);
                 pending.push(css[i]);
