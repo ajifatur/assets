@@ -229,109 +229,103 @@ var Spandiv = Spandiv || {};
 
     // DataTable
     n.DataTable = (selector) => {
-        n.LoadResources(n.Resources.datatables, function() {
-            var datatable = $(selector).DataTable({
-                "language": {
-                    "lengthMenu": "Menampilkan _MENU_ data",
-                    "zeroRecords": "Data tidak tersedia",
-                    "info": "Menampilkan _START_ sampai _END_ dari total _TOTAL_ data",
-                    "infoEmpty": "Data tidak ditemukan",
-                    "infoFiltered": "(Terfilter dari total _MAX_ data)",
-                    "search": "Cari:",
-                    "paginate": {
-                        "first": "Pertama",
-                        "last": "Terakhir",
-                        "previous": "<",
-                        "next": ">",
-                    },
-                    "processing": "Memproses data..."
+        var datatable = $(selector).DataTable({
+            "language": {
+                "lengthMenu": "Menampilkan _MENU_ data",
+                "zeroRecords": "Data tidak tersedia",
+                "info": "Menampilkan _START_ sampai _END_ dari total _TOTAL_ data",
+                "infoEmpty": "Data tidak ditemukan",
+                "infoFiltered": "(Terfilter dari total _MAX_ data)",
+                "search": "Cari:",
+                "paginate": {
+                    "first": "Pertama",
+                    "last": "Terakhir",
+                    "previous": "<",
+                    "next": ">",
                 },
-                // "fnDrawCallback": configFnDrawCallback,
-                "aLengthMenu": [[10, 25, 50, 100, -1], [10, 25, 50, 100, "Semua"]],
-                "pageLength": 10,
-                columnDefs: [
-                    {orderable: false, targets: 0},
-                    {orderable: false, targets: -1},
-                ],
-                order: []
-            });
-            return datatable;
+                "processing": "Memproses data..."
+            },
+            // "fnDrawCallback": configFnDrawCallback,
+            "aLengthMenu": [[10, 25, 50, 100, -1], [10, 25, 50, 100, "Semua"]],
+            "pageLength": 10,
+            columnDefs: [
+                {orderable: false, targets: 0},
+                {orderable: false, targets: -1},
+            ],
+            order: []
         });
+        return datatable;
     }
 
     // DataTable Server Side
     n.DataTableServerSide = (selector, conf) => {
-        n.LoadResources(n.Resources.datatables, function() {
-            var datatable = $(selector).DataTable({
-                processing: true,
-                serverSide: true,
-                ajax: conf.url,
-                columns: conf.columns,
-                "language": {
-                    "lengthMenu": "Menampilkan _MENU_ data",
-                    "zeroRecords": "Data tidak tersedia",
-                    "info": "Menampilkan _START_ sampai _END_ dari total _TOTAL_ data",
-                    "infoEmpty": "Data tidak ditemukan",
-                    "infoFiltered": "(Terfilter dari total _MAX_ data)",
-                    "search": "Cari:",
-                    "paginate": {
-                        "first": "Pertama",
-                        "last": "Terakhir",
-                        "previous": "<",
-                        "next": ">",
-                    },
-                    "processing": "Memproses data..."
+        var datatable = $(selector).DataTable({
+            processing: true,
+            serverSide: true,
+            ajax: conf.url,
+            columns: conf.columns,
+            "language": {
+                "lengthMenu": "Menampilkan _MENU_ data",
+                "zeroRecords": "Data tidak tersedia",
+                "info": "Menampilkan _START_ sampai _END_ dari total _TOTAL_ data",
+                "infoEmpty": "Data tidak ditemukan",
+                "infoFiltered": "(Terfilter dari total _MAX_ data)",
+                "search": "Cari:",
+                "paginate": {
+                    "first": "Pertama",
+                    "last": "Terakhir",
+                    "previous": "<",
+                    "next": ">",
                 },
-                // "fnDrawCallback": configFnDrawCallback,
-                "aLengthMenu": [[10, 25, 50, 100, -1], [10, 25, 50, 100, "Semua"]],
-                "pageLength": 10,
-                columnDefs: [
-                    {orderable: false, targets: 0},
-                    {orderable: false, targets: -1},
-                ],
-                order: [conf.order]
-            });
-            
-            datatable.on('draw.dt', function() {
-                n.Tooltip();
-            });
-            
-            return datatable;
+                "processing": "Memproses data..."
+            },
+            // "fnDrawCallback": configFnDrawCallback,
+            "aLengthMenu": [[10, 25, 50, 100, -1], [10, 25, 50, 100, "Semua"]],
+            "pageLength": 10,
+            columnDefs: [
+                {orderable: false, targets: 0},
+                {orderable: false, targets: -1},
+            ],
+            order: [conf.order]
         });
+        
+        datatable.on('draw.dt', function() {
+            n.Tooltip();
+        });
+        
+        return datatable;
     }
 
     // DataTable Rows Group
     n.DataTableRowsGroup = (selector, rowsGroup = null) => {
-        n.LoadResources(n.Resources.datatables, function() {
-            var datatable = $(selector).DataTable({
-                "language": {
-                    "lengthMenu": "Menampilkan _MENU_ data",
-                    "zeroRecords": "Data tidak tersedia",
-                    "info": "Menampilkan _START_ sampai _END_ dari total _TOTAL_ data",
-                    "infoEmpty": "Data tidak ditemukan",
-                    "infoFiltered": "(Terfilter dari total _MAX_ data)",
-                    "search": "Cari:",
-                    "paginate": {
-                        "first": "Pertama",
-                        "last": "Terakhir",
-                        "previous": "<",
-                        "next": ">",
-                    },
-                    "processing": "Memproses data..."
+        var datatable = $(selector).DataTable({
+            "language": {
+                "lengthMenu": "Menampilkan _MENU_ data",
+                "zeroRecords": "Data tidak tersedia",
+                "info": "Menampilkan _START_ sampai _END_ dari total _TOTAL_ data",
+                "infoEmpty": "Data tidak ditemukan",
+                "infoFiltered": "(Terfilter dari total _MAX_ data)",
+                "search": "Cari:",
+                "paginate": {
+                    "first": "Pertama",
+                    "last": "Terakhir",
+                    "previous": "<",
+                    "next": ">",
                 },
-                // "fnDrawCallback": configFnDrawCallback,
-                "aLengthMenu": [[10, 25, 50, 100, -1], [10, 25, 50, 100, "Semua"]],
-                "pageLength": -1,
-		"rowsGroup": rowsGroup,
-		"orderCellsTop": true,
-                columnDefs: [
-                    {orderable: false, targets: 0},
-                    {orderable: false, targets: -1},
-                ],
-                order: []
-            });
-            return datatable;
+                "processing": "Memproses data..."
+            },
+            // "fnDrawCallback": configFnDrawCallback,
+            "aLengthMenu": [[10, 25, 50, 100, -1], [10, 25, 50, 100, "Semua"]],
+            "pageLength": -1,
+            "rowsGroup": rowsGroup,
+            "orderCellsTop": true,
+            columnDefs: [
+                {orderable: false, targets: 0},
+                {orderable: false, targets: -1},
+            ],
+            order: []
         });
+        return datatable;
     }
 
     // Quill Editor
