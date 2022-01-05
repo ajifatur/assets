@@ -453,7 +453,7 @@ var Spandiv = Spandiv || {};
         var token = $("input[name=_token]").val();
         n.LoadResources(n.Resources.jqueryui, function() {
             var sortable = $(selector).sortable({
-                items: "> div",
+                items: "> div:not(.ui-state-disabled)",
                 placeholder: "ui-state-highlight",
                 start: function(event, ui) {
                     $(selector).find(".ui-state-highlight").css("height", $(ui.item).outerHeight());
