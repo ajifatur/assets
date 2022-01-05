@@ -460,7 +460,7 @@ var Spandiv = Spandiv || {};
                 },
                 update: function(event, ui) {
                     var url = $(this).data("url");
-                    var items = $(this).find(".ui-sortable-handle");
+                    var items = $(this).children(".ui-sortable-handle");
                     var ids = [];
                     $(items).each(function(key, elem) {
                         ids.push($(elem).data("id"));
