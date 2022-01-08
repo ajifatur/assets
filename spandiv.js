@@ -17,11 +17,11 @@ var Spandiv = Spandiv || {};
             "js" : "https://cdnjs.cloudflare.com/ajax/libs/clockpicker/0.0.7/bootstrap-clockpicker.min.js"
         },
         "datatables": {
-	    "css": "https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap5.min.css",
+	        "css": "https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap5.min.css",
             "js" : [
                 "https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js",
                 "https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap5.min.js",
-		"https://cdn.jsdelivr.net/gh/ashl1/datatables-rowsgroup@fbd569b8768155c7a9a62568e66a64115887d7d0/dataTables.rowsGroup.js"
+		        "https://cdn.jsdelivr.net/gh/ashl1/datatables-rowsgroup@fbd569b8768155c7a9a62568e66a64115887d7d0/dataTables.rowsGroup.js"
             ]
         },
         "datepicker": {
@@ -34,6 +34,10 @@ var Spandiv = Spandiv || {};
                 "https://cdn.jsdelivr.net/momentjs/latest/moment.min.js",
                 "https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"
             ]
+        },
+        "pace": {
+            "css": "https://cdn.jsdelivr.net/npm/pace-js@latest/pace-theme-default.min.css",
+            "js": "https://cdn.jsdelivr.net/npm/pace-js@latest/pace.min.js"
         },
         "jqueryui": {
             "js" : "https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
@@ -57,13 +61,14 @@ var Spandiv = Spandiv || {};
 
     // Enable Everywhere
     n.EnableEverywhere = () => {
+        n.Pace();
         n.Tooltip();
         n.ButtonLogout(".btn-logout", "#form-logout");
         n.ButtonTogglePassword(".btn-toggle-password");
     }
 
     // Load Resources
-    n.LoadResources = (resources, onSuccess) => {
+    n.LoadResources = (resources, onSuccess = null) => {
         var pending = [];
         var css = [].concat(resources.css);
         var js = [].concat(resources.js);
@@ -98,7 +103,7 @@ var Spandiv = Spandiv || {};
                 if(this.href !== undefined) pending.splice(pending.indexOf(this.href), 1);
                 if(this.src !== undefined) pending.splice(pending.indexOf(this.src), 1);
 				if(!pending.length) {
-					onSuccess();
+					if(onSuccess !== null) onSuccess();
                     removeElements();
 				}
 			}
@@ -478,6 +483,11 @@ var Spandiv = Spandiv || {};
             $(selector).disableSelection();
             return sortable;
         });
+    }
+
+    // Pace
+    n.Pace = () => {
+        n.LoadResources(n.Resources.pace);
     }
 
 })(Spandiv);

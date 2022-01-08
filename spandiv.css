@@ -39,8 +39,11 @@
 /* JQuery UI */
 .ui-state-highlight {
     height: 2rem;
-    margin-bottom: 1rem;
+    background-color: #f3eeb5;
 }
 .ui-sortable .ui-sortable-handle {
     cursor: move;
+}
+.ui-state-disabled {
+    color: var(--bs-danger);
 }
