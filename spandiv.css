@@ -41,11 +41,11 @@
     height: 2rem;
     background-color: #f3eeb5;
 }
-.ui-sortable .ui-sortable-handle {
+.ui-sortable-handle {
     cursor: move;
 }
 .ui-state-disabled {
-    color: var(--bs-danger);
+    cursor: no-drop;
 }
 
 /* AdminKit */
