@@ -432,9 +432,9 @@ var Spandiv = Spandiv || {};
                 items: "> div:not(.ui-state-disabled)",
                 placeholder: "ui-state-highlight",
                 start: function(event, ui) {
-                    $(selector).find(".ui-state-highlight").css({
+                    $(this).find(".ui-state-highlight").css({
                         "height": $(ui.item).outerHeight(),
-                        "margin-bottom": $(selector).find(".ui-sortable-handle").css("margin-bottom")
+                        "margin-bottom": $(this).find(".ui-sortable-handle").css("margin-bottom")
                     });
                 },
                 update: function(event, ui) {
