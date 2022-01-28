@@ -16,7 +16,7 @@ Place the following snippet inside your head tag:
 And then:
 
 ```html
-<link rel="stylesheet" href="https://ajifatur.github.io/assets/spandiv.css">
+<link rel="stylesheet" href="https://ajifatur.github.io/assets/spandiv.min.css">
 ```
 
 ## Required scripts
@@ -41,7 +41,6 @@ And then:
 ```html
 <script src="https://ajifatur.github.io/assets/spandiv.min.js"></script>
 <script>
-	// Enable Everywhere
 	Spandiv.EnableEverywhere();
 </script>
 ```
