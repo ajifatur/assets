@@ -19,6 +19,12 @@ And then:
 <link rel="stylesheet" href="https://ajifatur.github.io/assets/spandiv.min.css">
 ```
 
+And if you use AdminKit template, add this:
+
+```html
+<link rel="stylesheet" href="https://ajifatur.github.io/assets/adminkit-themes.min.css">
+```
+
 ## Required scripts
 
 (Optional) If you don't use Bootstrap yet, place the following snippet inside your bottom body tag:
@@ -40,7 +46,4 @@ And then:
 
 ```html
 <script src="https://ajifatur.github.io/assets/spandiv.min.js"></script>
-<script>
-	Spandiv.EnableEverywhere();
-</script>
 ```
