@@ -100,14 +100,14 @@ var Spandiv = Spandiv || {};
 
         // On load
         function onLoad() {
-			if(!this.readyState || this.readyState === "loaded" || this.readyState === "complete") {
+            if(!this.readyState || this.readyState === "loaded" || this.readyState === "complete") {
                 if(this.href !== undefined) pending.splice(pending.indexOf(this.href), 1);
                 if(this.src !== undefined) pending.splice(pending.indexOf(this.src), 1);
-				if(!pending.length) {
-					if(onSuccess !== null) onSuccess();
+                if(!pending.length) {
+                    if(onSuccess !== null) onSuccess();
                     removeElements();
-				}
-			}
+                }
+            }
         }
 
         // Remove duplicate elements
@@ -216,7 +216,7 @@ var Spandiv = Spandiv || {};
     // Bootstrap Tooltip
     n.Tooltip = () => {
         var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
-        tooltipTriggerList.map(function (tooltipTriggerEl) {
+        tooltipTriggerList.map(function(tooltipTriggerEl) {
             return new bootstrap.Tooltip(tooltipTriggerEl);
         });
     }
@@ -224,7 +224,7 @@ var Spandiv = Spandiv || {};
     // Bootstrap Popover
     n.Popover = () => {
         var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'));
-        var popoverList = popoverTriggerList.map(function(popoverTriggerEl) {
+        popoverTriggerList.map(function(popoverTriggerEl) {
             return new bootstrap.Popover(popoverTriggerEl, {html: true});
         });
     }
@@ -312,45 +312,6 @@ var Spandiv = Spandiv || {};
         return datatable;
     }
 
-    // DataTable Server Side
-    n.DataTableServerSide = (selector, conf) => {
-        var datatable = $(selector).DataTable({
-            processing: true,
-            serverSide: true,
-            ajax: conf.url,
-            columns: conf.columns,
-            "language": {
-                "lengthMenu": "Menampilkan _MENU_ data",
-                "zeroRecords": "Data tidak tersedia",
-                "info": "Menampilkan _START_ sampai _END_ dari total _TOTAL_ data",
-                "infoEmpty": "Data tidak ditemukan",
-                "infoFiltered": "(Terfilter dari total _MAX_ data)",
-                "search": "Cari:",
-                "paginate": {
-                    "first": "Pertama",
-                    "last": "Terakhir",
-                    "previous": "<",
-                    "next": ">",
-                },
-                "processing": "Memproses data..."
-            },
-            // "fnDrawCallback": configFnDrawCallback,
-            "aLengthMenu": [[10, 25, 50, 100, -1], [10, 25, 50, 100, "Semua"]],
-            "pageLength": 10,
-            columnDefs: [
-                {orderable: false, targets: 0},
-                {orderable: false, targets: -1},
-            ],
-            order: [conf.order]
-        });
-        
-        datatable.on('draw.dt', function() {
-            n.Tooltip();
-        });
-        
-        return datatable;
-    }
-
     // Quill Editor
     n.Quill = (selector) => {
         n.LoadResources(n.Resources.quill, function() {
@@ -386,26 +347,26 @@ var Spandiv = Spandiv || {};
     // Datepicker
     n.DatePicker = (selector) => {
         n.LoadResources(n.Resources.datepicker, function() {
-			$.fn.datepicker.dates['id'] = {
-				days: ["Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jum'at", "Sabtu"],
-				daysShort: ["Min", "Sen", "Sel", "Rab", "Kam", "Jum", "Sab"],
-				daysMin: ["Mi", "Sn", "Sl", "Ra", "Ka", "Ju", "Sa"],
-				months: ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"],
-				monthsShort: ["Jan", "Feb", "Mar", "Apr", "Mei", "Jun", "Jul", "Agu", "Sep", "Okt", "Nov", "Des"],
-				today: "Hari Ini",
-				clear: "Hapus",
-				format: "dd/mm/yyyy",
-				titleFormat: "MM yyyy",
-				weekStart: 0
-			};
-			
+            $.fn.datepicker.dates['id'] = {
+                days: ["Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jum'at", "Sabtu"],
+                daysShort: ["Min", "Sen", "Sel", "Rab", "Kam", "Jum", "Sab"],
+                daysMin: ["Mi", "Sn", "Sl", "Ra", "Ka", "Ju", "Sa"],
+                months: ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"],
+                monthsShort: ["Jan", "Feb", "Mar", "Apr", "Mei", "Jun", "Jul", "Agu", "Sep", "Okt", "Nov", "Des"],
+                today: "Hari Ini",
+                clear: "Hapus",
+                format: "dd/mm/yyyy",
+                titleFormat: "MM yyyy",
+                weekStart: 0
+            };
+
             var datepicker = $(selector).datepicker({
-				language: "id",
+                language: "id",
                 format: "dd/mm/yyyy",
                 todayHighlight: true,
                 autoclose: true
             });
-			
+
             return datepicker;
         });
     }
@@ -449,20 +410,20 @@ var Spandiv = Spandiv || {};
     }
 
     // Select2 Server Side
-    n.Select2ServerSide = (selector, conf) => {
+    n.Select2ServerSide = (selector, config) => {
         $(window).on("load", function() {
-            var key = conf.value;
+            var key = config.value;
             $.ajax({
                 type: "get",
-                url: conf.url,
+                url: config.url,
                 success: function(response) {
                     var html = '<option value="" disabled selected>--Pilih--</option>';
                     for(var i = 0; i < response.length; i++) {
-                        var selected = (key === response[i][conf.valueProp]) ? 'selected' : '';
-                        if(conf.bracketProp !== undefined)
-                            html += '<option value="' + response[i][conf.valueProp] + '" ' + selected + '>' + response[i][conf.nameProp] + ' (' + response[i][conf.bracketProp] + ')' + '</option>';
+                        var selected = (key === response[i][config.valueProp]) ? 'selected' : '';
+                        if(config.bracketProp !== undefined)
+                            html += '<option value="' + response[i][config.valueProp] + '" ' + selected + '>' + response[i][config.nameProp] + ' (' + response[i][config.bracketProp] + ')' + '</option>';
                         else
-                            html += '<option value="' + response[i][conf.valueProp] + '" ' + selected + '>' + response[i][conf.nameProp] + '</option>';
+                            html += '<option value="' + response[i][config.valueProp] + '" ' + selected + '>' + response[i][config.nameProp] + '</option>';
                     }
                     $(selector).html(html);
                 }
