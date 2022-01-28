@@ -63,6 +63,7 @@ var Spandiv = Spandiv || {};
     n.EnableEverywhere = () => {
         n.Pace();
         n.Tooltip();
+        n.Popover();
         n.ButtonLogout(".btn-logout", "#form-logout");
         n.ButtonTogglePassword(".btn-toggle-password");
     }
@@ -196,11 +197,35 @@ var Spandiv = Spandiv || {};
         }
     }
 
+    // Number Format
+    n.NumberFormat = (value) => {
+        var number_string = value.replace(/[^.\d]/g, '').toString();
+        var split = number_string.split('.');
+        var mod = split[0].length % 3;
+        var rupiah = split[0].substr(0, mod);
+        var thousand = split[0].substr(mod).match(/\d{3}/gi);
+
+        if(thousand) {
+            separator = mod ? ',' : '';
+            rupiah += separator + thousand.join(',');
+        }
+
+        return rupiah = split[1] != undefined ? rupiah + '.' + split[1] : rupiah;
+    }
+
     // Bootstrap Tooltip
     n.Tooltip = () => {
         var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
         tooltipTriggerList.map(function (tooltipTriggerEl) {
             return new bootstrap.Tooltip(tooltipTriggerEl);
+        });
+    }
+
+    // Bootstrap Popover
+    n.Popover = () => {
+        var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'));
+        var popoverList = popoverTriggerList.map(function(popoverTriggerEl) {
+            return new bootstrap.Popover(popoverTriggerEl, {html: true});
         });
     }
 
@@ -233,8 +258,21 @@ var Spandiv = Spandiv || {};
     }
 
     // DataTable
-    n.DataTable = (selector) => {
+    n.DataTable = (selector, config = {}) => {
+        // Define the columnDefs
+        var columnDefs = [
+            {orderable: false, targets: 0},
+            {orderable: false, targets: -1},
+        ];
+        if(config.orderAll === true)
+            columnDefs = [];
+
+        // Define datatable
         var datatable = $(selector).DataTable({
+            processing: config.serverSide !== undefined ? config.serverSide : false,
+            serverSide: config.serverSide !== undefined ? config.serverSide : false,
+            ajax: config.url !== undefined && config.serverSide === true ? config.url : null,
+            columns: config.columns !== undefined && config.serverSide === true ? config.columns : null,
             "language": {
                 "lengthMenu": "Menampilkan _MENU_ data",
                 "zeroRecords": "Data tidak tersedia",
@@ -252,13 +290,25 @@ var Spandiv = Spandiv || {};
             },
             // "fnDrawCallback": configFnDrawCallback,
             "aLengthMenu": [[10, 25, 50, 100, -1], [10, 25, 50, 100, "Semua"]],
-            "pageLength": 10,
-            columnDefs: [
-                {orderable: false, targets: 0},
-                {orderable: false, targets: -1},
-            ],
-            order: []
+            "pageLength": config.pageLength !== undefined ? config.pageLength : 10,
+            "rowsGroup": config.rowsGroup !== undefined ? config.rowsGroup : null,
+            "orderCellsTop": true,
+            columnDefs: columnDefs,
+            order: config.order !== undefined && config.serverSide === true ? [config.order] : []
         });
+
+        // Redraw
+        if(config.serverSide === true) {
+            datatable.on('draw.dt', function() {
+                n.Tooltip();
+            });
+        }
+
+        // Checkbox
+        n.CheckboxOne();
+        n.CheckboxAll();
+
+        // Return
         return datatable;
     }
 
@@ -298,38 +348,6 @@ var Spandiv = Spandiv || {};
             n.Tooltip();
         });
         
-        return datatable;
-    }
-
-    // DataTable Rows Group
-    n.DataTableRowsGroup = (selector, rowsGroup = null) => {
-        var datatable = $(selector).DataTable({
-            "language": {
-                "lengthMenu": "Menampilkan _MENU_ data",
-                "zeroRecords": "Data tidak tersedia",
-                "info": "Menampilkan _START_ sampai _END_ dari total _TOTAL_ data",
-                "infoEmpty": "Data tidak ditemukan",
-                "infoFiltered": "(Terfilter dari total _MAX_ data)",
-                "search": "Cari:",
-                "paginate": {
-                    "first": "Pertama",
-                    "last": "Terakhir",
-                    "previous": "<",
-                    "next": ">",
-                },
-                "processing": "Memproses data..."
-            },
-            // "fnDrawCallback": configFnDrawCallback,
-            "aLengthMenu": [[10, 25, 50, 100, -1], [10, 25, 50, 100, "Semua"]],
-            "pageLength": -1,
-            "rowsGroup": rowsGroup,
-            "orderCellsTop": true,
-            columnDefs: [
-                {orderable: false, targets: 0},
-                {orderable: false, targets: -1},
-            ],
-            order: []
-        });
         return datatable;
     }
 
@@ -489,5 +507,8 @@ var Spandiv = Spandiv || {};
     n.Pace = () => {
         n.LoadResources(n.Resources.pace);
     }
+
+    // Execute EnableEverywhere Method
+    n.EnableEverywhere();
 
 })(Spandiv);
