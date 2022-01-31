@@ -1,6 +1,6 @@
 ## Required stylesheets
 
-Read the documentation [here](https://ajifatur.github.io/docs/index.html) (Indonesian Only).
+Read the documentation [here](https://ajifatur.github.io/assets/docs/index.html) (Indonesian Only).
 
 ## Required stylesheets
 
