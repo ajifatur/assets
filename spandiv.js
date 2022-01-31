@@ -29,7 +29,7 @@ var Spandiv = Spandiv || {};
         },
         "pace": {
             "css": "https://cdn.jsdelivr.net/npm/pace-js@latest/pace-theme-default.min.css",
-            "js": "https://cdn.jsdelivr.net/npm/pace-js@latest/pace.min.js"
+            "js" : "https://cdn.jsdelivr.net/npm/pace-js@latest/pace.min.js"
         },
         "jqueryui": {
             "js" : "https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
