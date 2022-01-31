@@ -1,8 +1,10 @@
-## Required stylesheets
+## Docs
 
 Read the documentation [here](https://ajifatur.github.io/assets/docs/index.html) (Indonesian Only).
 
-## Required stylesheets
+## Getting Started
+
+### Stylesheets
 
 (Optional) If you don't use Bootstrap yet, place the following snippet inside your head tag:
 
@@ -29,13 +31,7 @@ And if you use AdminKit template, add this:
 <link rel="stylesheet" href="https://ajifatur.github.io/assets/adminkit-themes.min.css">
 ```
 
-## Required scripts
-
-(Optional) If you don't use Bootstrap yet, place the following snippet inside your bottom body tag (after jQuery):
-
-```html
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-```
+### Scripts
 
 Place the following snippet inside your bottom body tag:
 
@@ -44,6 +40,12 @@ Place the following snippet inside your bottom body tag:
 <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap5.min.js"></script>
 <script src="https://cdn.jsdelivr.net/gh/ashl1/datatables-rowsgroup@fbd569b8768155c7a9a62568e66a64115887d7d0/dataTables.rowsGroup.js"></script>
+```
+
+(Optional) If you don't use Bootstrap yet, place the following snippet inside your bottom body tag (after jQuery):
+
+```html
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 ```
 
 And then:
