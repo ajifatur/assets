@@ -1,5 +1,9 @@
 ## Required stylesheets
 
+Read the documentation [here](https://ajifatur.github.io/docs/index.html) (Indonesian Only).
+
+## Required stylesheets
+
 (Optional) If you don't use Bootstrap yet, place the following snippet inside your head tag:
 
 ```html
