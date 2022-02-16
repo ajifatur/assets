@@ -16,6 +16,10 @@ var Spandiv = Spandiv || {};
             "css": "https://cdnjs.cloudflare.com/ajax/libs/clockpicker/0.0.7/bootstrap-clockpicker.min.css",
             "js" : "https://cdnjs.cloudflare.com/ajax/libs/clockpicker/0.0.7/bootstrap-clockpicker.min.js"
         },
+        "croppie": {
+            "css": "https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.min.css",
+            "js" : "https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.min.js"
+        },
         "datepicker": {
             "css": "https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css",
             "js" : "https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"
@@ -203,6 +207,12 @@ var Spandiv = Spandiv || {};
         }
 
         return rupiah = split[1] != undefined ? rupiah + '.' + split[1] : rupiah;
+    }
+
+    // Bootstrap Modal
+    n.Modal = (selector) => {
+        var modal = bootstrap.Modal.getOrCreateInstance(document.querySelector(selector));
+        return modal;
     }
 
     // Bootstrap Tooltip
