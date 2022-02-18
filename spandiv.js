@@ -239,6 +239,12 @@ var Spandiv = Spandiv || {};
         toast.show();
     }
 
+    // Bootstrap Tab
+    n.Tab = (selector) => {
+        var tab = bootstrap.Tab.getOrCreateInstance(document.querySelector(selector));
+        return tab;
+    }
+
     // SweetAlert2 Warning
     n.SwalWarning = (text, form) => {
         n.LoadResources(n.Resources.sweetalert2, function() {
@@ -472,6 +478,40 @@ var Spandiv = Spandiv || {};
     // Pace
     n.Pace = () => {
         n.LoadResources(n.Resources.pace);
+    }
+
+    // Croppie
+    n.Croppie = (selector, options) => {
+        var croppie = $(selector).croppie({
+            viewport: {width: options.width, height: options.height, type: options.type == 'square' || options.type == 'circle' ? options.type : 'square'},
+            boundary: {width: options.width, height: options.height}
+        });
+        return croppie;
+    }
+
+    // Croppie Bind From URL
+    n.CroppieBindFromURL = (croppieObject, input) => {
+        if(input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                croppieObject.croppie('bind', {
+                    url: e.target.result
+                });
+            }
+            reader.readAsDataURL(input.files[0]);
+            input.value = null;
+        }
+    }
+
+    // Croppie Submit
+    n.CroppieSubmit = (croppieObject, form) => {
+        croppieObject.croppie('result', {
+            type: 'base64',
+            circle: false
+        }).then(function(response) {
+            $(form).find("input[name=image]").val(response);
+            $(form).submit();
+        });
     }
 
     // Execute EnableEverywhere Method

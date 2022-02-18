@@ -25,6 +25,12 @@ And then:
 <link rel="stylesheet" href="https://ajifatur.github.io/assets/spandiv.min.css">
 ```
 
+If your page has Croppie functions, add this:
+
+```html
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.min.css">
+```
+
 And if you use AdminKit template, add this:
 
 ```html
@@ -52,4 +58,10 @@ And then:
 
 ```html
 <script src="https://ajifatur.github.io/assets/spandiv.min.js"></script>
+```
+
+If your page has Croppie functions, add this:
+
+```html
+<script src="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.min.js"></script>
 ```
