@@ -144,6 +144,24 @@ var Spandiv = Spandiv || {};
         });
     }
 
+    // Button Delete Bulk
+    n.ButtonDeleteBulk = (button, form) => {
+        $(document).on("click", button, function(e) {
+            e.preventDefault();
+            var ids = [];
+            var checked = $(".dataTable .checkbox-one:checked");
+            if(checked.length > 0) {
+                $(checked).each(function(key,elem) {
+                    ids.push($(elem).data("id"));
+                });
+                $(form).find("input[name=ids]").val(ids);
+                n.SwalWarning("Anda yakin ingin menghapus data yang terpilih?", form);
+            }
+            else
+                n.SwalBasic("Tidak ada data yang terpilih!");
+        });
+    }
+
     // Button Logout
     n.ButtonLogout = (button, form) => {
         $(document).on("click", button, function(e) {
@@ -243,6 +261,19 @@ var Spandiv = Spandiv || {};
     n.Tab = (selector) => {
         var tab = bootstrap.Tab.getOrCreateInstance(document.querySelector(selector));
         return tab;
+    }
+
+    // SweetAlert2 Basic
+    n.SwalBasic = (text) => {
+        n.LoadResources(n.Resources.sweetalert2, function() {
+            Swal.fire({
+                text: text,
+                icon: "warning",
+                allowOutsideClick: false,
+                confirmButtonText: "OK",
+                confirmButtonColor: "#3085d6"
+            });
+        });
     }
 
     // SweetAlert2 Warning
