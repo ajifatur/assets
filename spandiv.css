@@ -19,7 +19,7 @@
 }
 
 /* Select2 */
-.select2 {
+div[class^="col"] > .select2 {
     width: 100%!important;
 }
 .select2-container {
