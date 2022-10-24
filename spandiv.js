@@ -332,6 +332,7 @@ var Spandiv = Spandiv || {};
             "pageLength": config.pageLength !== undefined ? config.pageLength : 10,
             "rowsGroup": config.rowsGroup !== undefined ? config.rowsGroup : null,
             "orderCellsTop": true,
+            fixedHeader: config.fixedHeader !== undefined ? config.fixedHeader : false,
             columnDefs: columnDefs,
             order: config.order !== undefined && config.serverSide === true ? [config.order] : []
         });
