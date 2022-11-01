@@ -421,7 +421,35 @@ var Spandiv = Spandiv || {};
                 startDate: time.start !== undefined ? time.start : moment().startOf('hour'),
                 endDate: time.end !== undefined ? time.end : moment().startOf('hour').add(48, 'hour'),
                 locale: {
-                    format: 'DD/MM/YYYY HH:mm'
+                    format: 'DD/MM/YYYY HH:mm',
+                    applyLabel: 'OK',
+                    cancelLabel: 'Batal',
+                    fromLabel: 'Dari',
+                    toLabel: 'Sampai',
+                    customRangeLabel: 'Kustom',
+                    daysOfWeek: [
+                        "Mi",
+                        "Sn",
+                        "Sl",
+                        "Ra",
+                        "Ka",
+                        "Ju",
+                        "Sa"
+                    ],
+                    monthNames: [
+                        "Januari",
+                        "Februari",
+                        "Maret",
+                        "April",
+                        "Mei",
+                        "Juni",
+                        "Juli",
+                        "Agustus",
+                        "September",
+                        "Oktober",
+                        "November",
+                        "Desember"
+                    ]
                 }
             });
             return daterangepicker;
