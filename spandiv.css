@@ -17,6 +17,57 @@
 .dataTable thead tr th.sorting_disabled:before, .table thead tr th.sorting_disabled:after {
     content: none!important;
 }
+.btn-datatable {
+    background-color: var(--bs-secondary)!important;
+    color: var(--bs-white)!important;
+    border: 1px solid transparent!important;
+    cursor: pointer;
+    box-sizing: border-box;
+    font-size: .75rem!important;
+    border-radius: 0!important;
+    margin: 0!important;
+    padding: 0.2rem 0.5rem!important;
+}
+.btn-datatable:first-child {
+    border-top-left-radius: 0.1rem!important;
+    border-bottom-left-radius: 0.1rem!important;
+}
+.btn-datatable:last-child {
+    border-top-right-radius: 0.1rem!important;
+    border-bottom-right-radius: 0.1rem!important;
+}
+.btn-datatable:hover, .btn-datatable:active {
+    color: var(--bs-white)!important;
+    border-color: var(--bs-secondary)!important;
+    background-color: var(--bs-secondary)!important;
+}
+@media(min-width: 768px) {
+    .dataTables_wrapper .top, .dataTables_wrapper .bottom {
+        display: flex;
+        justify-content: space-between;
+    }
+    .dataTables_wrapper .top > div, .dataTables_wrapper .bottom > div {
+        margin-top: 0!important;
+    }
+}
+.dataTables_wrapper .top {
+    margin-bottom: .5rem;
+}
+.dataTables_wrapper .top > div, .dataTables_wrapper .bottom > div {
+    margin-top: .5rem;
+}
+.dataTables_wrapper .top > div:first-child, .dataTables_wrapper .bottom > div:first-child {
+    margin-top: 0;
+}
+.dataTables_wrapper .bottom {
+    margin-top: .5rem;
+}
+.dataTables_wrapper .dt-buttons {
+    display: inline-flex;
+    position: relative;
+    vertical-align: middle;
+    justify-content: center;
+}
 
 /* Select2 */
 div[class^="col"] > .select2 {

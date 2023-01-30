@@ -1,7 +1,7 @@
 /*
  * Required:
- * JS: JQuery 3.6, Bootstrap 5
- * CSS: Bootstrap 5, Bootstrap Icons
+ * JS: JQuery 3.6, Bootstrap 5, DataTable
+ * CSS: Bootstrap 5, Bootstrap Icons, DataTable
  */
 
 
@@ -308,33 +308,50 @@ var Spandiv = Spandiv || {};
 
         // Define datatable
         var datatable = $(selector).DataTable({
+            scrollX: true,
+            scrollCollapse: true,
             processing: config.serverSide !== undefined ? config.serverSide : false,
             serverSide: config.serverSide !== undefined ? config.serverSide : false,
             ajax: config.url !== undefined && config.serverSide === true ? config.url : null,
             columns: config.columns !== undefined && config.serverSide === true ? config.columns : null,
-            "language": {
-                "lengthMenu": "Menampilkan _MENU_ data",
-                "zeroRecords": "Data tidak tersedia",
-                "info": "Menampilkan _START_ sampai _END_ dari total _TOTAL_ data",
-                "infoEmpty": "Data tidak ditemukan",
-                "infoFiltered": "(Terfilter dari total _MAX_ data)",
-                "search": "Cari:",
-                "paginate": {
-                    "first": "Pertama",
-                    "last": "Terakhir",
-                    "previous": "<",
-                    "next": ">",
+            language: {
+                lengthMenu: "Menampilkan _MENU_ data",
+                zeroRecords: "Data tidak tersedia",
+                info: "Menampilkan _START_ sampai _END_ dari total _TOTAL_ data",
+                infoEmpty: "Data tidak ditemukan",
+                infoFiltered: "(Terfilter dari total _MAX_ data)",
+                search: "Cari:",
+                paginate: {
+                    first: "Pertama",
+                    last: "Terakhir",
+                    previous: "<",
+                    next: ">",
                 },
-                "processing": "Memproses data..."
+                processing: "Memproses data..."
             },
             // "fnDrawCallback": configFnDrawCallback,
-            "aLengthMenu": [[10, 25, 50, 100, -1], [10, 25, 50, 100, "Semua"]],
-            "pageLength": config.pageLength !== undefined ? config.pageLength : 10,
-            "rowsGroup": config.rowsGroup !== undefined ? config.rowsGroup : null,
-            "orderCellsTop": true,
+            aLengthMenu: [[10, 25, 50, 100, -1], [10, 25, 50, 100, "Semua"]],
+            pageLength: config.pageLength !== undefined ? config.pageLength : 10,
+            rowsGroup: config.rowsGroup !== undefined ? config.rowsGroup : null,
+            orderCellsTop: true,
             fixedHeader: config.fixedHeader !== undefined ? config.fixedHeader : false,
             columnDefs: columnDefs,
-            order: config.order !== undefined && config.serverSide === true ? [config.order] : []
+            order: config.order !== undefined && config.serverSide === true ? [config.order] : [],
+            dom: '<"top"lfB>rt<"bottom"ip>',
+            buttons: [
+                {
+                    extend: "excel",
+                    className: "btn-datatable",
+                },
+                {
+                    extend: "pdf",
+                    className: "btn-datatable",
+                },
+                {
+                    text: "Hapus Terpilih",
+                    className: "btn-datatable btn-delete-bulk"
+                }
+            ]
         });
 
         // Redraw
