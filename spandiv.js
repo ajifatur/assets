@@ -306,6 +306,38 @@ var Spandiv = Spandiv || {};
         if(config.orderAll === true)
             columnDefs = [];
 
+        // Define fixedColumns
+        var fixedColumns = {
+            left: config.fixedColumns !== undefined && config.fixedColumns.left ? config.fixedColumns.left : 0,
+            right: config.fixedColumns !== undefined && config.fixedColumns.right !== undefined ? config.fixedColumns.right : 0
+        }
+
+        // Define buttons
+        var buttons = [
+            {
+                extend: "excel",
+                text: '<i class="bi-file-excel"></i> Excel',
+                className: "btn-datatable",
+                exportOptions: {
+                    columns: "th:not(.notexport)"
+                }
+            },
+            {
+                extend: "pdf",
+                text: '<i class="bi-file-pdf"></i> PDF',
+                className: "btn-datatable",
+                exportOptions: {
+                    columns: "th:not(.notexport)"
+                }
+            }
+        ];
+        if(config.deleteBulk === true) {
+            buttons.push({
+                text: '<i class="bi-trash"></i> Hapus Terpilih',
+                className: "btn-datatable btn-delete-bulk"
+            });
+        }
+
         // Define datatable
         var datatable = $(selector).DataTable({
             scrollX: true,
@@ -320,7 +352,8 @@ var Spandiv = Spandiv || {};
                 info: "Menampilkan _START_ sampai _END_ dari total _TOTAL_ data",
                 infoEmpty: "Data tidak ditemukan",
                 infoFiltered: "(Terfilter dari total _MAX_ data)",
-                search: "Cari:",
+                search: "",
+                searchPlaceholder: "Cari...",
                 paginate: {
                     first: "Pertama",
                     last: "Terakhir",
@@ -335,23 +368,11 @@ var Spandiv = Spandiv || {};
             rowsGroup: config.rowsGroup !== undefined ? config.rowsGroup : null,
             orderCellsTop: true,
             fixedHeader: config.fixedHeader !== undefined ? config.fixedHeader : false,
+            fixedColumns: fixedColumns,
             columnDefs: columnDefs,
             order: config.order !== undefined && config.serverSide === true ? [config.order] : [],
-            dom: '<"top"lfB>rt<"bottom"ip>',
-            buttons: [
-                {
-                    extend: "excel",
-                    className: "btn-datatable",
-                },
-                {
-                    extend: "pdf",
-                    className: "btn-datatable",
-                },
-                {
-                    text: "Hapus Terpilih",
-                    className: "btn-datatable btn-delete-bulk"
-                }
-            ]
+            dom: config.buttons !== undefined && config.buttons === true ? '<"top"lfB>rt<"bottom"ip>' : '<"top"lf>rt<"bottom"ip>',
+            buttons: buttons
         });
 
         // Redraw
@@ -402,7 +423,7 @@ var Spandiv = Spandiv || {};
     }
 
     // Datepicker
-    n.DatePicker = (selector) => {
+    n.DatePicker = (selector, format = "dd/mm/yyyy") => {
         n.LoadResources(n.Resources.datepicker, function() {
             $.fn.datepicker.dates['id'] = {
                 days: ["Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jum'at", "Sabtu"],
@@ -412,14 +433,14 @@ var Spandiv = Spandiv || {};
                 monthsShort: ["Jan", "Feb", "Mar", "Apr", "Mei", "Jun", "Jul", "Agu", "Sep", "Okt", "Nov", "Des"],
                 today: "Hari Ini",
                 clear: "Hapus",
-                format: "dd/mm/yyyy",
+                format: format,
                 titleFormat: "MM yyyy",
                 weekStart: 0
             };
 
             var datepicker = $(selector).datepicker({
                 language: "id",
-                format: "dd/mm/yyyy",
+                format: format,
                 todayHighlight: true,
                 autoclose: true
             });
