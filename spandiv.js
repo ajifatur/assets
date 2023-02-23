@@ -321,14 +321,6 @@ var Spandiv = Spandiv || {};
                 exportOptions: {
                     columns: "th:not(.notexport)"
                 }
-            },
-            {
-                extend: "pdf",
-                text: '<i class="bi-file-pdf"></i> PDF',
-                className: "btn-datatable",
-                exportOptions: {
-                    columns: "th:not(.notexport)"
-                }
             }
         ];
         if(config.deleteBulk === true) {
