@@ -1,0 +1,177 @@
+/* Colored */
+body[data-theme=colored] .sidebar, body[data-theme=colored] .sidebar-content, body[data-theme=colored] .settings-title, body[data-theme=colored] .settings-toggle {background: linear-gradient(135deg,#266fd9,#2359a8 40%,#2359a8);}
+
+/* Red */
+body[data-theme=red] .sidebar, body[data-theme=red] .sidebar-content, body[data-theme=red] .settings-title, body[data-theme=red] .settings-toggle {background: var(--bs-red);}
+
+/* Blue */
+body[data-theme=blue] .sidebar, body[data-theme=blue] .sidebar-content, body[data-theme=blue] .settings-title, body[data-theme=blue] .settings-toggle {background: var(--bs-blue);}
+
+/* Green */
+body[data-theme=green] .sidebar, body[data-theme=green] .sidebar-content, body[data-theme=green] .settings-title, body[data-theme=green] .settings-toggle {background: var(--bs-green);}
+
+/* Cyan */
+body[data-theme=cyan] .sidebar, body[data-theme=cyan] .sidebar-content, body[data-theme=cyan] .settings-title, body[data-theme=cyan] .settings-toggle {background: var(--bs-cyan);}
+
+/* Purple */
+body[data-theme=purple] .sidebar, body[data-theme=purple] .sidebar-content, body[data-theme=purple] .settings-title, body[data-theme=purple] .settings-toggle {background: var(--bs-purple);}
+
+/* Pink */
+body[data-theme=pink] .sidebar, body[data-theme=pink] .sidebar-content, body[data-theme=pink] .settings-title, body[data-theme=pink] .settings-toggle {background: var(--bs-pink);}
+
+/* Gray */
+body[data-theme=gray] .sidebar, body[data-theme=gray] .sidebar-content, body[data-theme=gray] .settings-title, body[data-theme=gray] .settings-toggle {background: var(--bs-gray);}
+
+
+/* All */
+body[data-theme=red] footer.footer,
+body[data-theme=blue] footer.footer,
+body[data-theme=green] footer.footer,
+body[data-theme=cyan] footer.footer,
+body[data-theme=purple] footer.footer,
+body[data-theme=pink] footer.footer,
+body[data-theme=gray] footer.footer {background: #fff;}
+
+body[data-theme=red] .navbar-bg,
+body[data-theme=blue] .navbar-bg,
+body[data-theme=green] .navbar-bg,
+body[data-theme=cyan] .navbar-bg,
+body[data-theme=purple] .navbar-bg,
+body[data-theme=pink] .navbar-bg,
+body[data-theme=gray] .navbar-bg {background: #fff;}
+
+body[data-theme=red] .sidebar-link, body[data-theme=red] a.sidebar-link,
+body[data-theme=blue] .sidebar-link, body[data-theme=blue] a.sidebar-link,
+body[data-theme=green] .sidebar-link, body[data-theme=green] a.sidebar-link,
+body[data-theme=cyan] .sidebar-link, body[data-theme=cyan] a.sidebar-link,
+body[data-theme=purple] .sidebar-link, body[data-theme=purple] a.sidebar-link,
+body[data-theme=pink] .sidebar-link, body[data-theme=pink] a.sidebar-link,
+body[data-theme=gray] .sidebar-link, body[data-theme=gray] a.sidebar-link {color: rgba(248,249,250,.7); background: transparent; border-left-color: transparent;}
+
+body[data-theme=red] .sidebar-link i, body[data-theme=red] .sidebar-link svg, body[data-theme=red] a.sidebar-link i, body[data-theme=red] a.sidebar-link svg,
+body[data-theme=blue] .sidebar-link i, body[data-theme=blue] .sidebar-link svg, body[data-theme=blue] a.sidebar-link i, body[data-theme=blue] a.sidebar-link svg,
+body[data-theme=green] .sidebar-link i, body[data-theme=green] .sidebar-link svg, body[data-theme=green] a.sidebar-link i, body[data-theme=green] a.sidebar-link svg,
+body[data-theme=cyan] .sidebar-link i, body[data-theme=cyan] .sidebar-link svg, body[data-theme=cyan] a.sidebar-link i, body[data-theme=cyan] a.sidebar-link svg,
+body[data-theme=purple] .sidebar-link i, body[data-theme=purple] .sidebar-link svg, body[data-theme=purple] a.sidebar-link i, body[data-theme=purple] a.sidebar-link svg,
+body[data-theme=pink] .sidebar-link i, body[data-theme=pink] .sidebar-link svg, body[data-theme=pink] a.sidebar-link i, body[data-theme=pink] a.sidebar-link svg,
+body[data-theme=gray] .sidebar-link i, body[data-theme=gray] .sidebar-link svg, body[data-theme=gray] a.sidebar-link i, body[data-theme=gray] a.sidebar-link svg {color: rgba(233,236,239,.5);}
+
+body[data-theme=red] .sidebar-link:hover,
+body[data-theme=blue] .sidebar-link:hover,
+body[data-theme=green] .sidebar-link:hover,
+body[data-theme=cyan] .sidebar-link:hover,
+body[data-theme=purple] .sidebar-link:hover,
+body[data-theme=pink] .sidebar-link:hover,
+body[data-theme=gray] .sidebar-link:hover {color: rgba(248,249,250,.85); background: transparent; border-left-color: transparent;}
+
+body[data-theme=red] .sidebar-link:hover i, body[data-theme=red] .sidebar-link:hover svg,
+body[data-theme=blue] .sidebar-link:hover i, body[data-theme=blue] .sidebar-link:hover svg,
+body[data-theme=green] .sidebar-link:hover i, body[data-theme=green] .sidebar-link:hover svg,
+body[data-theme=cyan] .sidebar-link:hover i, body[data-theme=cyan] .sidebar-link:hover svg,
+body[data-theme=purple] .sidebar-link:hover i, body[data-theme=purple] .sidebar-link:hover svg,
+body[data-theme=pink] .sidebar-link:hover i, body[data-theme=pink] .sidebar-link:hover svg,
+body[data-theme=gray] .sidebar-link:hover i, body[data-theme=gray] .sidebar-link:hover svg {color: rgba(233,236,239,.75);}
+
+body[data-theme=red] .sidebar-item.active .sidebar-link:hover, body[data-theme=red] .sidebar-item.active > .sidebar-link,
+body[data-theme=blue] .sidebar-item.active .sidebar-link:hover, body[data-theme=blue] .sidebar-item.active > .sidebar-link,
+body[data-theme=green] .sidebar-item.active .sidebar-link:hover, body[data-theme=green] .sidebar-item.active > .sidebar-link,
+body[data-theme=cyan] .sidebar-item.active .sidebar-link:hover, body[data-theme=cyan] .sidebar-item.active > .sidebar-link,
+body[data-theme=purple] .sidebar-item.active .sidebar-link:hover, body[data-theme=purple] .sidebar-item.active > .sidebar-link,
+body[data-theme=pink] .sidebar-item.active .sidebar-link:hover, body[data-theme=pink] .sidebar-item.active > .sidebar-link,
+body[data-theme=gray] .sidebar-item.active .sidebar-link:hover, body[data-theme=gray] .sidebar-item.active > .sidebar-link {color: #fff; background: linear-gradient(90deg,rgba(59,125,221,.1),rgba(59,125,221,.0875) 50%,transparent); border-left-color: #a8c5f0;}
+
+body[data-theme=red] .sidebar-item.active .sidebar-link:hover i, body[data-theme=red] .sidebar-item.active .sidebar-link:hover svg, body[data-theme=red] .sidebar-item.active > .sidebar-link i, body[data-theme=red] .sidebar-item.active > .sidebar-link svg,
+body[data-theme=blue] .sidebar-item.active .sidebar-link:hover i, body[data-theme=blue] .sidebar-item.active .sidebar-link:hover svg, body[data-theme=blue] .sidebar-item.active > .sidebar-link i, body[data-theme=blue] .sidebar-item.active > .sidebar-link svg,
+body[data-theme=green] .sidebar-item.active .sidebar-link:hover i, body[data-theme=green] .sidebar-item.active .sidebar-link:hover svg, body[data-theme=green] .sidebar-item.active > .sidebar-link i, body[data-theme=green] .sidebar-item.active > .sidebar-link svg,
+body[data-theme=cyan] .sidebar-item.active .sidebar-link:hover i, body[data-theme=cyan] .sidebar-item.active .sidebar-link:hover svg, body[data-theme=cyan] .sidebar-item.active > .sidebar-link i, body[data-theme=cyan] .sidebar-item.active > .sidebar-link svg,
+body[data-theme=purple] .sidebar-item.active .sidebar-link:hover i, body[data-theme=purple] .sidebar-item.active .sidebar-link:hover svg, body[data-theme=purple] .sidebar-item.active > .sidebar-link i, body[data-theme=purple] .sidebar-item.active > .sidebar-link svg,
+body[data-theme=pink] .sidebar-item.active .sidebar-link:hover i, body[data-theme=pink] .sidebar-item.active .sidebar-link:hover svg, body[data-theme=pink] .sidebar-item.active > .sidebar-link i, body[data-theme=pink] .sidebar-item.active > .sidebar-link svg,
+body[data-theme=gray] .sidebar-item.active .sidebar-link:hover i, body[data-theme=gray] .sidebar-item.active .sidebar-link:hover svg, body[data-theme=gray] .sidebar-item.active > .sidebar-link i, body[data-theme=gray] .sidebar-item.active > .sidebar-link svg {color: #e9ecef;}
+
+body[data-theme=red] .sidebar-dropdown .sidebar-link,
+body[data-theme=blue] .sidebar-dropdown .sidebar-link,
+body[data-theme=green] .sidebar-dropdown .sidebar-link,
+body[data-theme=cyan] .sidebar-dropdown .sidebar-link,
+body[data-theme=purple] .sidebar-dropdown .sidebar-link,
+body[data-theme=pink] .sidebar-dropdown .sidebar-link,
+body[data-theme=gray] .sidebar-dropdown .sidebar-link {color: #bbc2c8; background: transparent;}
+
+body[data-theme=red] .sidebar-dropdown .sidebar-item .sidebar-link:hover,
+body[data-theme=blue] .sidebar-dropdown .sidebar-item .sidebar-link:hover,
+body[data-theme=green] .sidebar-dropdown .sidebar-item .sidebar-link:hover,
+body[data-theme=cyan] .sidebar-dropdown .sidebar-item .sidebar-link:hover,
+body[data-theme=purple] .sidebar-dropdown .sidebar-item .sidebar-link:hover,
+body[data-theme=pink] .sidebar-dropdown .sidebar-item .sidebar-link:hover,
+body[data-theme=gray] .sidebar-dropdown .sidebar-item .sidebar-link:hover {color: #e9ecef; background: transparent;}
+
+body[data-theme=red] .sidebar-dropdown .sidebar-item.active .sidebar-link,
+body[data-theme=blue] .sidebar-dropdown .sidebar-item.active .sidebar-link,
+body[data-theme=green] .sidebar-dropdown .sidebar-item.active .sidebar-link,
+body[data-theme=cyan] .sidebar-dropdown .sidebar-item.active .sidebar-link,
+body[data-theme=purple] .sidebar-dropdown .sidebar-item.active .sidebar-link,
+body[data-theme=pink] .sidebar-dropdown .sidebar-item.active .sidebar-link,
+body[data-theme=gray] .sidebar-dropdown .sidebar-item.active .sidebar-link {color: #fff; background: transparent;}
+
+body[data-theme=red] .sidebar-brand,
+body[data-theme=blue] .sidebar-brand,
+body[data-theme=green] .sidebar-brand,
+body[data-theme=cyan] .sidebar-brand,
+body[data-theme=purple] .sidebar-brand,
+body[data-theme=pink] .sidebar-brand,
+body[data-theme=gray] .sidebar-brand {color: #f8f9fa;}
+
+body[data-theme=red] .sidebar-brand:hover,
+body[data-theme=blue] .sidebar-brand:hover,
+body[data-theme=green] .sidebar-brand:hover,
+body[data-theme=cyan] .sidebar-brand:hover,
+body[data-theme=purple] .sidebar-brand:hover,
+body[data-theme=pink] .sidebar-brand:hover,
+body[data-theme=gray] .sidebar-brand:hover {color: #f8f9fa;}
+
+body[data-theme=red] .sidebar-header,
+body[data-theme=blue] .sidebar-header,
+body[data-theme=green] .sidebar-header,
+body[data-theme=cyan] .sidebar-header,
+body[data-theme=purple] .sidebar-header,
+body[data-theme=pink] .sidebar-header,
+body[data-theme=gray] .sidebar-header {color: #ced4da;}
+
+body[data-theme=red] .sidebar-cta-content,
+body[data-theme=blue] .sidebar-cta-content,
+body[data-theme=green] .sidebar-cta-content,
+body[data-theme=cyan] .sidebar-cta-content,
+body[data-theme=purple] .sidebar-cta-content,
+body[data-theme=pink] .sidebar-cta-content,
+body[data-theme=gray] .sidebar-cta-content {color: #e9ecef; background: #18488d;}
+
+body[data-theme=red] .sidebar-user-title, body[data-theme=red] .sidebar-user-title:hover,
+body[data-theme=blue] .sidebar-user-title, body[data-theme=blue] .sidebar-user-title:hover,
+body[data-theme=green] .sidebar-user-title, body[data-theme=green] .sidebar-user-title:hover,
+body[data-theme=cyan] .sidebar-user-title, body[data-theme=cyan] .sidebar-user-title:hover,
+body[data-theme=purple] .sidebar-user-title, body[data-theme=purple] .sidebar-user-title:hover,
+body[data-theme=pink] .sidebar-user-title, body[data-theme=pink] .sidebar-user-title:hover,
+body[data-theme=gray] .sidebar-user-title, body[data-theme=gray] .sidebar-user-title:hover {color: #e9ecef;}
+
+body[data-theme=red] .sidebar-user-subtitle,
+body[data-theme=blue] .sidebar-user-subtitle,
+body[data-theme=green] .sidebar-user-subtitle,
+body[data-theme=cyan] .sidebar-user-subtitle,
+body[data-theme=purple] .sidebar-user-subtitle,
+body[data-theme=pink] .sidebar-user-subtitle,
+body[data-theme=gray] .sidebar-user-subtitle {color: #adb5bd;}
+
+body[data-theme=red] .wrapper,
+body[data-theme=blue] .wrapper,
+body[data-theme=green] .wrapper,
+body[data-theme=cyan] .wrapper,
+body[data-theme=purple] .wrapper,
+body[data-theme=pink] .wrapper,
+body[data-theme=gray] .wrapper {background: linear-gradient(135deg,#266fd9,#2359a8 40%,#2359a8);}
+
+body[data-theme=red] .simplebar-scrollbar:before,
+body[data-theme=blue] .simplebar-scrollbar:before,
+body[data-theme=green] .simplebar-scrollbar:before,
+body[data-theme=cyan] .simplebar-scrollbar:before,
+body[data-theme=purple] .simplebar-scrollbar:before,
+body[data-theme=pink] .simplebar-scrollbar:before,
+body[data-theme=gray] .simplebar-scrollbar:before{background: #fff;}
