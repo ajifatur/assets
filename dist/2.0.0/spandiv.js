@@ -151,7 +151,7 @@ var Spandiv = Spandiv || {};
                 n.Confirm("Anda yakin ingin menghapus data yang terpilih?", form);
             }
             else
-                n.Basic("Tidak ada data yang terpilih!");
+                n.Alert("Tidak ada data yang terpilih!");
         });
     }
 
@@ -256,8 +256,8 @@ var Spandiv = Spandiv || {};
         return tab;
     }
 
-    // SweetAlert2 Basic
-    n.Basic = (text) => {
+    // SweetAlert2 Alert
+    n.Alert = (text) => {
         n.LoadResources(n.Resources.sweetalert2, function() {
             Swal.fire({
                 text: text,
@@ -269,7 +269,7 @@ var Spandiv = Spandiv || {};
         });
     }
 
-    // SweetAlert2 Warning
+    // SweetAlert2 Confirm
     n.Confirm = (text, form) => {
         n.LoadResources(n.Resources.sweetalert2, function() {
             Swal.fire({
