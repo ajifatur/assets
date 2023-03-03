@@ -317,7 +317,8 @@ var Spandiv = Spandiv || {};
                 className: "btn-datatable",
                 exportOptions: {
                     columns: "th:not(.notexport)"
-                }
+                },
+                autoFilter: true
             }
         ];
         if(options.deleteBulk === true) {
