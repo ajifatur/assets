@@ -24,6 +24,10 @@ var Spandiv = Spandiv || {};
             "css": "https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css",
             "js" : "https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"
         },
+        "magnificpopup": {
+            "css": "https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/magnific-popup.min.css",
+            "js" : "https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.min.js"
+        },
         "pace": {
             "css": "https://cdn.jsdelivr.net/npm/pace-js@latest/pace-theme-default.min.css",
             "js" : "https://cdn.jsdelivr.net/npm/pace-js@latest/pace.min.js"
@@ -591,6 +595,22 @@ var Spandiv = Spandiv || {};
         }).then(function(response) {
             $(form).find("input[name=image]").val(response);
             $(form).submit();
+        });
+    }
+
+    // Magnific Popup
+    n.MagnificPopup = (selector) => {
+        n.LoadResources(n.Resources.magnificpopup, function() {
+            var magnificpopup = $(selector).magnificPopup({
+                type: 'image',
+                gallery: {
+                    enabled: true
+                },
+                image: {
+                    titleSrc: 'title'
+                }
+            });
+            return magnificpopup;
         });
     }
 
