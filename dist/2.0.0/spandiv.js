@@ -615,6 +615,50 @@ var Spandiv = Spandiv || {};
         });
     }
 
+    // Highchart.js Pie Chart
+    n.HighchartsPie = (selector, options) => {
+        var hc = Highcharts.chart(selector, {
+            chart: {
+                plotBackgroundColor: null,
+                plotBorderWidth: null,
+                plotShadow: false,
+                type: 'pie'
+            },
+            title: {
+                text: options.title,
+                align: options.titleAlign !== undefined ? options.titleAlign : 'center'
+            },
+            subtitle: {
+                text: options.subtitle !== undefined ? options.subtitle : '',
+                align: options.titleAlign !== undefined ? options.titleAlign : 'center'
+            },
+            tooltip: {
+                headerFormat: '',
+                pointFormat: '<span style="color:{point.color}">\u25CF</span> <b> {point.name}</b><br/>' +
+                '{series.name}: <b>{point.y}' + (options.valueSuffix !== undefined ? ' ' + options.valueSuffix : '') + '<b> ({point.percentage:.0f}%)'
+            },
+            accessibility: {
+                enabled: false
+            },
+            plotOptions: {
+                pie: {
+                    allowPointSelect: true,
+                    cursor: 'pointer',
+                    dataLabels: {
+                        enabled: true,
+                        format: '<b>{point.name}</b>: {point.y}' + (options.valueSuffix !== undefined ? ' ' + options.valueSuffix : '')
+                    }
+                }
+            },
+            series: [{
+                name: options.seriesName,
+                colorByPoint: true,
+                data: options.data
+            }]
+        });
+        return hc;
+    }
+
     // Execute EnableEverywhere Method
     n.EnableEverywhere();
 
