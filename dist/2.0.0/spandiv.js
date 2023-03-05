@@ -492,12 +492,72 @@ var Spandiv = Spandiv || {};
     }
 
     // Select2
-    n.Select2 = (selector) => {
+    n.Select2 = (selector, options = {}) => {
         n.LoadResources(n.Resources.select2, function() {
-            var select2 = $(selector).select2({
-                width: 'resolve',
-                allowClear: true
+            var configurations = {
+                width: "resolve",
+                allowClear: true,
+                placeholder: "--Pilih--",
+                language: {
+                    noResults: function () {
+                        if(options !== undefined && options.enableAddOption == true) {
+                            var keyword = $(".select2-search__field").val();
+                            return '<span id="select2-add-option" data-keyword="' + keyword + '">Tambahkan data <b><u>' + keyword + '</u></b></span>';
+                        }
+                        else {
+                            return 'Tidak ditemukan.';
+                        }
+                    }
+                },
+                escapeMarkup: function (markup) {
+                    return markup;
+                }
+            };
+            var select2 = $(selector).select2(configurations);
+
+            if(options !== undefined && options.enableAddOption == true) {
+                $(document).on("click", ".select2-results__option.select2-results__message", function(e) {
+                    e.preventDefault();
+                    var keyword = $(this).find("#select2-add-option").data("keyword");
+                    var url = $(selector).data("url");
+                    var _token = $(selector).data("token");
+                    var multiple = $(selector).attr("multiple");
+                    $.ajax({
+                        type: "post",
+                        url: url,
+                        data: {_token: _token, keyword: keyword},
+                        success: function() {
+                            $(selector).find("option").last().after('<option value="' + keyword + '">' + keyword + '</option>');
+                            $(selector).select2("close");
+                            if(typeof multiple !== 'undefined' && multiple !== false) {
+                                var values = $(selector).val() + "," + keyword;
+                                $.each(values.split(","), function(i,e) {
+                                    $(selector).find("option[value='" + e + "']").prop("selected", true);
+                                });
+                            }
+                            else {
+                                $(selector).val(keyword);
+                            }
+                            $(selector).select2(configurations).trigger("change");
+                        }
+                    });
+                });
+            }
+
+            if(options !== undefined && options.orderByClicked == true) {
+                $(selector).on("select2:select", function(e) {
+                    var element = e.params.data.element;
+                    var $element = $(element);
+                    $element.detach();
+                    $(this).append($element);
+                    $(this).trigger("change");
+                });
+            }
+
+            $(selector).on("select2:open", function(e) {
+                document.querySelector(".select2-search__field").focus();
             });
+
             return select2;
         });
     }
@@ -522,7 +582,12 @@ var Spandiv = Spandiv || {};
                 }
             });
         });
-        return n.Select2(selector);
+        var enableAddOption = options.enableAddOption !== undefined ? options.enableAddOption : false;
+        var orderByClicked = options.orderByClicked !== undefined ? options.orderByClicked : false;
+        return n.Select2(selector, {
+            enableAddOption: enableAddOption,
+            orderByClicked: orderByClicked
+        });
     }
 
     // Sortable

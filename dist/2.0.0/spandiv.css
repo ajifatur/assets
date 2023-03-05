@@ -72,15 +72,15 @@
 }
 
 /* Select2 */
-div[class^="col"] > .select2 {
+.select2:not(.input-group .select2) {
     width: 100%!important;
-}
-.select2-container {
-    font-size: .75rem;
 }
 .select2-container--default .select2-selection--single {
     border: 1px solid #ced4da!important;
     border-radius: .1rem!important;
+}
+.select2-results__option.select2-results__message:has(#select2-add-option) {
+    cursor: pointer;
 }
 
 /* Quill Editor */
