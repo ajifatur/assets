@@ -129,3 +129,13 @@ Place the following snippet inside your bottom body tag:
 <script src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
 ```
+
+### Highcharts
+
+Place the following snippet inside your bottom body tag:
+
+```html
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<script src="https://code.highcharts.com/modules/export-data.js"></script>
+```
