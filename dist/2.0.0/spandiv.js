@@ -453,29 +453,8 @@ var Spandiv = Spandiv || {};
                 fromLabel: 'Dari',
                 toLabel: 'Sampai',
                 customRangeLabel: 'Kustom',
-                daysOfWeek: [
-                    "Mi",
-                    "Sn",
-                    "Sl",
-                    "Ra",
-                    "Ka",
-                    "Ju",
-                    "Sa"
-                ],
-                monthNames: [
-                    "Januari",
-                    "Februari",
-                    "Maret",
-                    "April",
-                    "Mei",
-                    "Juni",
-                    "Juli",
-                    "Agustus",
-                    "September",
-                    "Oktober",
-                    "November",
-                    "Desember"
-                ]
+                daysOfWeek: ["Mi", "Sn", "Sl", "Ra", "Ka", "Ju", "Sa"],
+                monthNames: ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"]
             }
         });
         return daterangepicker;
@@ -526,17 +505,17 @@ var Spandiv = Spandiv || {};
                         type: "post",
                         url: url,
                         data: {_token: _token, keyword: keyword},
-                        success: function() {
-                            $(selector).find("option").last().after('<option value="' + keyword + '">' + keyword + '</option>');
+                        success: function(response) {
+                            $(selector).find("option").last().after('<option value="' + response.id + '">' + response.keyword + '</option>');
                             $(selector).select2("close");
                             if(typeof multiple !== 'undefined' && multiple !== false) {
-                                var values = $(selector).val() + "," + keyword;
+                                var values = $(selector).val() + "," + response.id;
                                 $.each(values.split(","), function(i,e) {
                                     $(selector).find("option[value='" + e + "']").prop("selected", true);
                                 });
                             }
                             else {
-                                $(selector).val(keyword);
+                                $(selector).val(response.id);
                             }
                             $(selector).select2(configurations).trigger("change");
                         }
