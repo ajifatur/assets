@@ -1,27 +1,31 @@
 /* Colored */
-body[data-theme=colored] .sidebar, body[data-theme=colored] .sidebar-content, body[data-theme=colored] .settings-title, body[data-theme=colored] .settings-toggle {background: linear-gradient(135deg,#266fd9,#2359a8 40%,#2359a8);}
+body[data-theme=colored] .sidebar, body[data-theme=colored] .sidebar-content, body[data-theme=colored] .nav-brand, body[data-theme=colored] .settings-title, body[data-theme=colored] .settings-toggle {background: linear-gradient(135deg,#266fd9,#2359a8 40%,#2359a8);}
 
 /* Red */
-body[data-theme=red] .sidebar, body[data-theme=red] .sidebar-content, body[data-theme=red] .settings-title, body[data-theme=red] .settings-toggle {background: var(--bs-red);}
+body[data-theme=red] .sidebar, body[data-theme=red] .sidebar-content, body[data-theme=red] .nav-brand, body[data-theme=red] .settings-title, body[data-theme=red] .settings-toggle {background: var(--bs-red);}
 
 /* Blue */
-body[data-theme=blue] .sidebar, body[data-theme=blue] .sidebar-content, body[data-theme=blue] .settings-title, body[data-theme=blue] .settings-toggle {background: var(--bs-blue);}
+body[data-theme=blue] .sidebar, body[data-theme=blue] .sidebar-content, body[data-theme=blue] .nav-brand, body[data-theme=blue] .settings-title, body[data-theme=blue] .settings-toggle {background: var(--bs-blue);}
 
 /* Green */
-body[data-theme=green] .sidebar, body[data-theme=green] .sidebar-content, body[data-theme=green] .settings-title, body[data-theme=green] .settings-toggle {background: var(--bs-green);}
+body[data-theme=green] .sidebar, body[data-theme=green] .sidebar-content, body[data-theme=green] .nav-brand, body[data-theme=green] .settings-title, body[data-theme=green] .settings-toggle {background: var(--bs-green);}
 
 /* Cyan */
-body[data-theme=cyan] .sidebar, body[data-theme=cyan] .sidebar-content, body[data-theme=cyan] .settings-title, body[data-theme=cyan] .settings-toggle {background: var(--bs-cyan);}
+body[data-theme=cyan] .sidebar, body[data-theme=cyan] .sidebar-content, body[data-theme=cyan] .nav-brand, body[data-theme=cyan] .settings-title, body[data-theme=cyan] .settings-toggle {background: var(--bs-cyan);}
 
 /* Purple */
-body[data-theme=purple] .sidebar, body[data-theme=purple] .sidebar-content, body[data-theme=purple] .settings-title, body[data-theme=purple] .settings-toggle {background: var(--bs-purple);}
+body[data-theme=purple] .sidebar, body[data-theme=purple] .sidebar-content, body[data-theme=purple] .nav-brand, body[data-theme=purple] .settings-title, body[data-theme=purple] .settings-toggle {background: var(--bs-purple);}
 
 /* Pink */
-body[data-theme=pink] .sidebar, body[data-theme=pink] .sidebar-content, body[data-theme=pink] .settings-title, body[data-theme=pink] .settings-toggle {background: var(--bs-pink);}
+body[data-theme=pink] .sidebar, body[data-theme=pink] .sidebar-content, body[data-theme=pink] .nav-brand, body[data-theme=pink] .settings-title, body[data-theme=pink] .settings-toggle {background: var(--bs-pink);}
 
 /* Gray */
-body[data-theme=gray] .sidebar, body[data-theme=gray] .sidebar-content, body[data-theme=gray] .settings-title, body[data-theme=gray] .settings-toggle {background: var(--bs-gray);}
+body[data-theme=gray] .sidebar, body[data-theme=gray] .sidebar-content, body[data-theme=gray] .nav-brand, body[data-theme=gray] .settings-title, body[data-theme=gray] .settings-toggle {background: var(--bs-gray);}
 
+/* Light */
+body[data-theme=light] .nav-brand, body[data-theme=light] .settings-title {background: #fff;}
+body[data-theme=light] .offcanvas-title {color: var(--bs-body-color);}
+body[data-theme=light] .btn-close-white {filter: none;}
 
 /* All */
 body[data-theme=red] footer.footer,
