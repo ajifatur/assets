@@ -178,4 +178,34 @@ body[data-theme=green] .simplebar-scrollbar:before,
 body[data-theme=cyan] .simplebar-scrollbar:before,
 body[data-theme=purple] .simplebar-scrollbar:before,
 body[data-theme=pink] .simplebar-scrollbar:before,
-body[data-theme=gray] .simplebar-scrollbar:before{background: #fff;}
+body[data-theme=gray] .simplebar-scrollbar:before {background: #fff;}
+
+body[data-size=small] {font-size: .875rem;}
+body[data-size=small] .btn {border-radius: 0.1rem; font-size: .75rem; padding: 0.2rem 0.5rem;}
+body[data-size=small] .form-control {border-radius: 0.1rem; font-size: .75rem; min-height: calc(1.525rem + 2px); padding: 0.2rem 0.5rem;}
+body[data-size=small] .form-select {font-size: .75rem; padding-bottom: 0.2rem; padding-left: 0.5rem; padding-top: 0.2rem;}
+body[data-size=small] .input-group > .btn, body[data-size=small] .input-group > .form-control, body[data-size=small] .input-group > .form-select, body[data-size=small] .input-group > .input-group-text {border-radius: 0.1rem; font-size: .75rem; padding: 0.2rem 0.5rem;}
+body[data-size=small] .select2-container {font-size: .75rem;}
+body[data-size=small] .select2-container .select2-selection--single, .select2-container--default .select2-selection--single .select2-selection__rendered {height: 28px;}
+body[data-size=small] .select2-container--default .select2-selection--single .select2-selection__rendered, body[data-size=small] .select2-container--default .select2-selection--single .select2-selection__clear, body[data-size=small] .select2-container--default .select2-selection--single .select2-selection__arrow {height: 26px;}
+body[data-size=small] .select2-container--default .select2-selection--single .select2-selection__rendered {line-height: 26px;}
+
+body[data-size=medium] {font-size: .925rem;}
+body[data-size=medium] .btn {border-radius: 0.2rem; font-size: .875rem; padding: 0.3rem 0.85rem;}
+body[data-size=medium] .form-control {border-radius: 0.2rem; font-size: .875rem; min-height: calc(1.75rem + 2px); padding: 0.3rem 0.85rem;}
+body[data-size=medium] .form-select {font-size: .875rem; padding-bottom: 0.3rem; padding-left: .85rem; padding-top: 0.3rem;}
+body[data-size=medium] .input-group > .btn, body[data-size=medium] .input-group > .form-control, body[data-size=medium] .input-group > .form-select, body[data-size=medium] .input-group > .input-group-text {border-radius: 0.2rem; font-size: .875rem; padding: 0.3rem 0.85rem;}
+body[data-size=medium] .select2-container {font-size: .875rem;}
+body[data-size=medium] .select2-container .select2-selection--single, .select2-container--default .select2-selection--single .select2-selection__rendered {height: 32.59px;}
+body[data-size=medium] .select2-container--default .select2-selection--single .select2-selection__rendered, body[data-size=medium] .select2-container--default .select2-selection--single .select2-selection__clear, body[data-size=medium] .select2-container--default .select2-selection--single .select2-selection__arrow {height: 30.59px;}
+body[data-size=medium] .select2-container--default .select2-selection--single .select2-selection__rendered {line-height: 30.59px;}
+
+body[data-size=large] {font-size: 1rem;}
+body[data-size=large] .btn {border-radius: 0.3rem; font-size: .925rem; padding: 0.4rem 1rem;}
+body[data-size=large] .form-control {border-radius: 0.3rem; font-size: .925rem; min-height: calc(2.1875rem + 2px); padding: 0.4rem 1rem;}
+body[data-size=large] .form-select {font-size: .925rem; padding-bottom: 0.4rem; padding-left: 1rem; padding-top: 0.4rem;}
+body[data-size=large] .input-group > .btn, body[data-size=large] .input-group > .form-control, body[data-size=large] .input-group > .form-select, body[data-size=large] .input-group > .input-group-text {border-radius: 0.3rem; font-size: .925rem; padding: 0.4rem 1rem;}
+body[data-size=large] .select2-container {font-size: .925rem;}
+body[data-size=large] .select2-container .select2-selection--single, .select2-container--default .select2-selection--single .select2-selection__rendered {height: 37px;}
+body[data-size=large] .select2-container--default .select2-selection--single .select2-selection__rendered, body[data-size=large] .select2-container--default .select2-selection--single .select2-selection__clear, body[data-size=large] .select2-container--default .select2-selection--single .select2-selection__arrow {height: 35px;}
+body[data-size=large] .select2-container--default .select2-selection--single .select2-selection__rendered {line-height: 35px;}
