@@ -1,4 +1,16 @@
 /* Bootstrap */
+body {
+    overflow-y: auto;
+}
+.nav-brand {
+    text-align: center!important;
+    background: #222e3c;
+}
+@media(min-width: 991.99px) {
+    .nav-brand {
+        display: none;
+    }
+}
 .form-check-input {
     cursor: pointer;
 }
@@ -16,6 +28,11 @@
 }
 .dataTable thead tr th.sorting_disabled:before, .table thead tr th.sorting_disabled:after {
     content: none!important;
+}
+.dataTables_processing {
+    color: #fff;
+    background-color: #333;
+    z-index: 1;
 }
 .btn-datatable {
     background-color: var(--bs-white)!important;
