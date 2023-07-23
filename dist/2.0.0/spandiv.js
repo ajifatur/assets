@@ -209,19 +209,24 @@ var Spandiv = Spandiv || {};
     }
 
     // Number Format
-    n.NumberFormat = (value) => {
-        var number_string = value.replace(/[^.\d]/g, '').toString();
-        var split = number_string.split('.');
-        var mod = split[0].length % 3;
-        var rupiah = split[0].substr(0, mod);
-        var thousand = split[0].substr(mod).match(/\d{3}/gi);
+    n.NumberFormat = (value, thousandSeparator = ',') => {
+        if(thousandSeparator == ',' || thousandSeparator == '.') {
+            var decimalSeparator = thousandSeparator == ',' ? '.' : ',';
+            var number_string = thousandSeparator == ',' ? value.toString().replace(/[^.\d]/g, '') : value.toString().replace(/[^,\d]/g, '');
+            var split = thousandSeparator == ',' ? number_string.split('.') : number_string.split(','); // Split if decimal
+            var mod = split[0].length % 3;
+            var first = split[0].substr(0, mod);
+            var thousand = split[0].substr(mod).match(/\d{3}/gi);
+            var result = '';
 
-        if(thousand) {
-            separator = mod ? ',' : '';
-            rupiah += separator + thousand.join(',');
+            if(thousand) {
+                separator = mod ? thousandSeparator : '';
+                result = first + separator + thousand.join(thousandSeparator);
+            }
+
+            return result = split[1] != undefined ? result + decimalSeparator + split[1] : result;
         }
-
-        return rupiah = split[1] != undefined ? rupiah + '.' + split[1] : rupiah;
+        else return 'Unsupported separator!';
     }
 
     // Bootstrap Modal
