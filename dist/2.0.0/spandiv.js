@@ -495,7 +495,8 @@ var Spandiv = Spandiv || {};
                 },
                 escapeMarkup: function (markup) {
                     return markup;
-                }
+                },
+                dropdownParent: options !== undefined && options.dropdownParent != undefined ? $(options.dropdownParent) : $(document.body)
             };
             var select2 = $(selector).select2(configurations);
 
