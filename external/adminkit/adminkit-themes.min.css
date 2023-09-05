@@ -27,6 +27,11 @@ body[data-theme=light] .nav-brand, body[data-theme=light] .settings-title {backg
 body[data-theme=light] .offcanvas-title {color: var(--bs-body-color);}
 body[data-theme=light] .btn-close-white {filter: none;}
 
+/* Font Family */
+body[data-font=default] {font-family: var(--bs-body-font-family);}
+body[data-font=sans-serif] {font-family: sans-serif;}
+body[data-font=system-ui] {font-family: system-ui;}
+
 /* All */
 body[data-theme=red] footer.footer,
 body[data-theme=blue] footer.footer,
