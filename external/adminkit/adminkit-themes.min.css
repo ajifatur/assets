@@ -214,3 +214,6 @@ body[data-size=large] .select2-container {font-size: .925rem;}
 body[data-size=large] .select2-container .select2-selection--single, .select2-container--default .select2-selection--single .select2-selection__rendered {height: 37px;}
 body[data-size=large] .select2-container--default .select2-selection--single .select2-selection__rendered, body[data-size=large] .select2-container--default .select2-selection--single .select2-selection__clear, body[data-size=large] .select2-container--default .select2-selection--single .select2-selection__arrow {height: 35px;}
 body[data-size=large] .select2-container--default .select2-selection--single .select2-selection__rendered {line-height: 35px;}
+
+.sidebar-dropdown .sidebar-link:before {content: "";}
+.sidebar-dropdown .sidebar-item.active .sidebar-item:not(.active) .sidebar-link {color: #fff;}
