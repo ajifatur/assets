@@ -323,7 +323,9 @@ var Spandiv = Spandiv || {};
                 exportOptions: {
                     columns: "th:not(.notexport)"
                 },
-                autoFilter: true
+                autoFilter: true,
+                footer: true,
+                title: ""
             }
         ];
         if(options.deleteBulk === true) {
